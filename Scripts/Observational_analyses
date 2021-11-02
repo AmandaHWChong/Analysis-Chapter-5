@@ -8,7 +8,7 @@ data$alcintakefreq_initialassessment <- as.numeric(data$alcintakefreq_initialass
 data$I260_I269 <- factor(data$I260_I269) #PE outcome 
 data$DVT <- factor(data$DVT)
 data$X41270_I21 <- factor(data$X41270_I21) #Acute MI incidence outcome 
-data$ X40001_I21 <- factor(data$ X40001_I21) Mortality after MI outcome 
+data$X40001_I21 <- factor(data$ X40001_I21) Mortality after MI outcome 
 data$age_initialrecruitment <- as.numeric(data$age_initialrecruitment)
 
 #Extract names of variables
