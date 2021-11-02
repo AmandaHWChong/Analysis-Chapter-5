@@ -18,7 +18,7 @@ variables<-names(data)
 # X1 + X2 + X3 + X4 (4)
 # A1 + A2 + A3 (3)  
 
-num.exposures<- 12 + 2
+num.exposures<- 6 + 8
 
 #Create empty data frame for results
 res<-matrix( rep( 0, len= num.exposures^2), nrow = num.exposures)
