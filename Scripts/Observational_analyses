@@ -1,0 +1,127 @@
+ #Read in data
+data <- read.table("UKBBall_riskfactors", header = T, stringsAsFactors = F)
+
+#Convert all binary outcomes to factors and ordinal outcomes to numeric 
+data$sex <- factor(data$sex)
+data$eversmoked_initialassessment <- factor(data$eversmoked_initialassessment)
+data$alcintakefreq_initialassessment <- as.numeric(data$alcintakefreq_initialassessment)
+data$I260_I269 <- factor(data$I260_I269) #PE outcome 
+data$DVT <- factor(data$DVT)
+data$X41270_I21 <- factor(data$X41270_I21) #Acute MI incidence outcome 
+data$ X40001_I21 <- factor(data$ X40001_I21) Mortality after MI outcome 
+data$age_initialrecruitment <- as.numeric(data$age_initialrecruitment)
+
+#Extract names of variables
+variables<-names(data)
+
+# Number of X1s plus adjusted covs not PCs
+# X1 + X2 + X3 + X4 (4)
+# A1 + A2 + A3 (3)  
+
+num.exposures<- 12 + 2
+
+#Create empty data frame for results
+res<-matrix( rep( 0, len= num.exposures^2), nrow = num.exposures)
+res.se<-matrix( rep( 0, len= num.exposures^2), nrow = num.exposures)
+res.pvalue<-matrix( rep( 0, len= num.exposures^2), nrow = num.exposures)
+
+#Regress each variable on all other variables, saving results
+for(i in 1:ncol(res)){
+  
+  t.outcome<-variables[i]
+  
+  t.exposure.list<-variables[-i]
+  
+  t.res<-rep(0,(num.exposures-1))
+  
+  t.pvalue<-rep(0,(num.exposures-1))
+  
+  t.se<-rep(0,(num.exposures-1))
+  
+  for(j in 1:(num.exposures-1)){
+    
+    t.exposures<-paste(t.exposure.list[j])
+    
+    t.exposures<-paste(c(t.exposures,variables[(num.exposures-2):length(variables)]))
+    
+    t.exposures<-unique(t.exposures)
+    
+    t.exposures<-t.exposures[t.exposures!=t.outcome]
+    
+    t.exposures<-paste(t.exposures,collapse="+")
+    
+    t.formula<-as.formula(paste(t.outcome,t.exposures,sep="~"))
+    
+    if(is.factor(data[,i])){
+      
+      mod.t<-summary(glm(t.formula,data=data,family="binomial"))
+      
+      t.res[j]<-mod.t$coefficients[2,1]
+      t.se[j]<-mod.t$coefficients[2,2]
+      t.pvalue[j]<-mod.t$coefficients[2,4]
+      
+    }else{
+      
+      mod.t<-summary(lm(t.formula,data=data))
+      
+      t.res[j]<-mod.t$coefficients[2,1]
+      t.se[j]<-mod.t$coefficients[2,2]
+      t.pvalue[j]<-mod.t$coefficients[2,4]
+      
+    }
+    
+  }
+  
+  #Making 1 on diagonal
+  
+  if(i == 1){
+    
+    t.res<-c(1,t.res)
+    t.se<-c(1,t.se)
+    t.pvalue<-c(1,t.pvalue)
+    
+  }
+  
+  if(i == num.exposures){
+    
+    t.res<-c(t.res,1)
+    t.se<-c(t.se,1)
+    t.pvalue<-c(t.pvalue,1)
+    
+  }
+  
+  if(i != 1 & i != num.exposures){
+    
+    t.res<-c(t.res[1:(i-1)],1,t.res[i:(num.exposures-1)])
+    t.se<-c(t.se[1:(i-1)],1,t.se[i:(num.exposures-1)])
+    t.pvalue<-c(t.pvalue[1:(i-1)],1,t.pvalue[i:(num.exposures-1)])
+    
+  }
+  
+  #Populating zero matrices
+  
+  res[,i]<-t.res
+  res.se[,i]<-t.se
+  res.pvalue[,i]<-t.pvalue
+  
+}
+
+#Making it look pretty
+
+results<-data.frame(res)
+
+names(results)<-variables[1:num.exposures]
+
+row.names(results)<-variables[1:num.exposures]
+
+se.data<-data.frame(res.se)
+
+names(se.data)<-variables[1:num.exposures]
+
+row.names(se.data)<-variables[1:num.exposures]
+
+pval.data<-data.frame(res.pvalue)
+
+names(pval.data)<-variables[1:num.exposures]
+
+row.names(pval.data)<-variables[1:num.exposures]
