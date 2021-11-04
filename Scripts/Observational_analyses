@@ -5,10 +5,10 @@ data <- read.table("UKBBall_riskfactors", header = T, stringsAsFactors = F)
 data$sex <- factor(data$sex)
 data$eversmoked_initialassessment <- factor(data$eversmoked_initialassessment)
 data$alcintakefreq_initialassessment <- as.numeric(data$alcintakefreq_initialassessment)
-data$I260_I269 <- factor(data$I260_I269) #PE outcome 
+data$PE <- factor(data$PE)  
 data$DVT <- factor(data$DVT)
-data$X41270_I21 <- factor(data$X41270_I21) #Acute MI incidence outcome 
-data$X40001_I21 <- factor(data$X40001_I21) #Mortality after MI outcome 
+data$Acute_MI <- factor(data$Acute_MI)  
+data$Mortality_MI <- factor(data$Mortality_MI) #Mortality afte MI outcome 
 data$age_initialrecruitment <- as.numeric(data$age_initialrecruitment)
 
 #Extract names of variables
