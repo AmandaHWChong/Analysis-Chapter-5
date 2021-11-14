@@ -1,0 +1,38 @@
+###Extract LD clumped HaemGen platelet count and mean platelet volume GWAS from MR-Base###
+
+###Standardise GWAS for input into genetic risk score script###
+
+###Generate genetic risk score####
+
+##Use script 'PLINK_platelet_PRS_noUKB_bgen.sh derived from Rebecca Richmond 
+
+#!/bin/bash
+
+#PBS -N PRS_MPV
+#PBS -o PRS_MPV
+#PBS -e PRS_MPV_error
+#PBS -l walltime=24:00:00
+#PBS -l nodes=1:ppn=2
+#PBS -S /bin/bash
+
+cd /projects/MRC-IEU/research/projects/ieu1/wp1/028/working/data/results/UKBB/Phenotypes/Platelet_phenotypes_and_medication/Input/PRS
+
+module load apps/plink-2.00
+
+for i in {10..22}
+do
+rm /projects/MRC-IEU/research/projects/ieu1/wp1/028/working/data/results/UKBB/Phenotypes/Platelet_phenotypes_and_medication/Input/PRS/HaemGen_MPV_GRS_${i}-temporary.*
+plink \
+--data data.chr \
+--bgen /projects/MRC-IEU/research/data/ukbiobank/genetic/variants/arrays/imputed/released/2018-09-18/data/dosage_bgen/data.chr${i}.bgen \
+--sample /projects/MRC-IEU/research/data/ukbiobank/genetic/variants/arrays/imputed/released/2018-09-18/data/dosage_bgen/data.chr1-22_plink.sample \
+--score /projects/MRC-IEU/research/projects/ieu1/wp1/028/working/data/results/UKBB/Phenotypes/Platelet_phenotypes_and_medication/Input/PRS/ieu-a-1006_HaemGen_MPV_SD_input \
+--out /projects/MRC-IEU/research/projects/ieu1/wp1/028/working/data/results/UKBB/Phenotypes/Platelet_phenotypes_and_medication/Input/PRS/HaemGen_MPV_PRS_noukb${i} \
+
+done
+
+#Rename Allele score column to reflect chromosome number and join each chromosome file 
+
+#Join files and keep columns: FID, IID and SCORE1_AVG_CHR(1-22) 
+
+
