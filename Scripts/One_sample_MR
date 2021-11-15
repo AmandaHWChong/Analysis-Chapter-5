@@ -33,7 +33,7 @@ done
 
 #Rename Allele score column to reflect chromosome number and join each chromosome file 
 
-#Join files and keep columns: FID, IID and SCORE1_AVG_CHR(1-22) 
+#Join using 'paste' files and keep columns: FID, IID and SCORE1_AVG_CHR(1-22) 
 
 ###Perform one-sample MR###
 
