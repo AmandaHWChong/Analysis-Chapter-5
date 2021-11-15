@@ -61,6 +61,6 @@ summary(ivmodel.UKBall.PLT)$coef[2,2] # Standard error of 2SLS estimate
 #Perform second stage - Fitted values from first regression on binary outcome 
 #In a two-stage analysis using a binary outcome (case-control setting) requires use of logistic regression with the inference on the controls only (where Y = 0). This can be performed by sequential regression using the 'predict' function 
 
-g0=g[data$Acute_MI==0]
+g0=g[data$Acute_MI==1]
 
-Res.UKBall.PLT <- glm(data$Acute_MI ~ predict(lm(data$PLT_initial_SD[data$Acute_MI==0]~g0), newdata=list(g0=g)), family = binomial)
+Res.UKBall.PLT <- glm(data$Acute_MI ~ predict(lm(data$PLT_initial_SD[data$Acute_MI==1]~g0), newdata=list(g0=g)), family = binomial)
