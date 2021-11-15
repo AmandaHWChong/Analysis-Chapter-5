@@ -64,6 +64,3 @@ summary(ivmodel.UKBall.PLT)$coef[2,2] # Standard error of 2SLS estimate
 g0=g[data$Acute_MI==0]
 
 Res.UKBall.PLT <- glm(data$Acute_MI ~ predict(lm(data$PLT_initial_SD[data$Acute_MI==0]~g0), newdata=list(g0=g)), family = binomial)
-
-
-
