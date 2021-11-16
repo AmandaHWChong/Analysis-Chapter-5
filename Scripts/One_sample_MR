@@ -97,9 +97,7 @@ for(i in 1:ncol(res)){
   t.outcome<-variables[i]
   
   t.exposure.list<-variables[-i]
-  
-  g0=g[t.outcome==0]
-  
+     
   t.res<-rep(0,(num.exposures-1))
   
   t.pvalue<-rep(0,(num.exposures-1))
@@ -115,8 +113,10 @@ for(i in 1:ncol(res)){
     t.exposures<-unique(t.exposures)
     
     t.exposures<-t.exposures[t.exposures!=t.outcome]
-    
+            
     t.exposures<-paste(t.exposures,collapse="+")
+    
+    g0=g[t.outcome==0]
     
     t.formula<-as.formula(paste(t.outcome ~ predict(lm(t.exposures[t.outcome==0]~g0, newdata=list(g0=g))
     
