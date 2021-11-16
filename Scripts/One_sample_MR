@@ -99,14 +99,14 @@ for(i in 1:ncol(res)){
   
   t.exposure.list<-variables[-i]
   
+  g0=g[t.outcome==0]
+  
   t.res<-rep(0,(num.exposures-1))
   
   t.pvalue<-rep(0,(num.exposures-1))
   
   t.se<-rep(0,(num.exposures-1))
-  
-  g0=g[t.outcome==0]
-  
+     
   for(j in 1:(num.exposures-1)){
     
     t.exposures<-paste(t.exposure.list[j])
