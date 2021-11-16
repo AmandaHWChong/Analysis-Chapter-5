@@ -67,13 +67,12 @@ summary(ivmodel.UKBall.PLT)$coef[2,2] # Standard error of 2SLS estimate
 
 
 #TEST#
+#Read in relevant packages
+library(ivreg)
+
 #Read in data
 data <- read.table("/projects/MRC-IEU/research/projects/ieu1/wp1/028/working/data/results/UKBB/Phenotypes/Platelet_phenotypes_and_medication/Model_selfreported_ICD9_ICD10/IEU_output_extracted_plateletphenotypes_acuteMI_mortalityafterMI_DVT_PE_covariates_PC40_withIDS_FINAL", header = T) 
-
-#Convert all binary outcomes to factors and ordinal outcomes to numeric 
-data$sex <- factor(data$sex)
-data$eversmoked_initialassessment <- factor(data$eversmoked_initialassessment)
-data$alcintakefreq_initialassessment <- as.numeric(data$alcintakefreq_initialassessment)
+PLT_GRS <- read.table("/projects/MRC-IEU/research/projects/ieu1/wp1/028/working/data/results/UKBB/Phenotypes/Platelet_phenotypes_and_medication/Input/PRS/HaemGen_PLT_GRS_chr1_22", header = T) 
 
 #Extract names of variables
 variables<-names(data)
