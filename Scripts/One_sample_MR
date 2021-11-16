@@ -117,10 +117,8 @@ for(i in 1:ncol(res)){
     t.exposures<-paste(t.exposures,collapse="+")
     
     g0=g[t.outcome==0]
-    
-    t.formula<-as.formula(paste(t.outcome ~ predict(lm(t.exposures[t.outcome==0]~g0), newdata=list(g0=g)))
-            
-    mod.t<-summary(glm(t.formula,data=data,family="binomial"))
+                  
+    mod.t<-summary(glm(data=data,t.outcome ~ predict(lm(t.exposures[t.outcome==0]~g0), newdata=list(g0=g)), family="binomial"))
       
       t.res[j]<-mod.t$coefficients[2,1]
       t.se[j]<-mod.t$coefficients[2,2]
