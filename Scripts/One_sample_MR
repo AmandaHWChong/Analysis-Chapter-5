@@ -50,21 +50,15 @@ data <- read.table("/projects/MRC-IEU/research/projects/ieu1/wp1/028/working/dat
 
 PLT_GRS <- read.table("/projects/MRC-IEU/research/projects/ieu1/wp1/028/working/data/results/UKBB/Phenotypes/Platelet_phenotypes_and_medication/Input/PRS/HaemGen_PLT_GRS_chr1_22", header = T) 
 
-#Perform first stage - GRS on exposure 
-
-ivmodel.UKBall.PLT = ivreg(data$Acute_MI ~ data$PLT_initial_SD + data$alcintakefreq_initialassessment + data$eversmoked_initialassessment + data$BMI_initialassessment + data$HDL_initialassessment +  data$LDL_initialassessment + data$triglycerides_initialassessment + data$sex + data$age_initialrecruitment + data$PC1 + data$PC2 + data$PC3 + data$PC4 + data$PC5 + data$PC6 + data$PC7 + data$PC8 + data$PC9 + data$PC10 + data$PC11 + data$PC12 + data$PC13 + data$PC14 + data$PC15 + data$PC16 + data$PC17 + data$PC18 + data$PC19 + data$PC20 + data$PC21 + data$PC22 + data$PC23 + data$PC24 + data$PC25 + data$PC26 + data$PC27 + data$PC28 + data$PC29 + data$PC30 + data$PC31 + data$PC32 + data$PC33 + data$PC34 + data$PC35 + data$PC36 + data$PC37 + data$PC38 + data$PC39 + data$PC40 | PLT_GRS$SCORE1_AVG_CHR1 + PLT_GRS$SCORE1_AVG_CHR2 + PLT_GRS$SCORE1_AVG_CHR3 + PLT_GRS$SCORE1_AVG_CHR4 + PLT_GRS$SCORE1_AVG_CHR5 + PLT_GRS$SCORE1_AVG_CHR6 + PLT_GRS$SCORE1_AVG_CHR7 + PLT_GRS$SCORE1_AVG_CHR8 + PLT_GRS$SCORE1_AVG_CHR9 + PLT_GRS$SCORE1_AVG_CHR10 + PLT_GRS$SCORE1_AVG_CHR11 + PLT_GRS$SCORE1_AVG_CHR12 + PLT_GRS$SCORE1_AVG_CHR14 + PLT_GRS$SCORE1_AVG_CHR15 + PLT_GRS$SCORE1_AVG_CHR17 + PLT_GRS$SCORE1_AVG_CHR19, x = TRUE)
-
-summary(ivmodel.UKBall.PLT)
-summary(ivmodel.UKBall.PLT)$coef[2] # 2SLS estimate 
-summary(ivmodel.UKBall.PLT)$coef[2,2] # Standard error of 2SLS estimate 
-
-#Perform second stage - Fitted values from first regression on binary outcome 
+#2SLS analyses - Binary outcome
 #In a two-stage analysis using a binary outcome (case-control setting) requires use of logistic regression with the inference on the controls only (where Y = 0). This can be performed by sequential regression using the 'predict' function 
 
 g = PLT_GRS$PLT_GRS 
 
 g0=g[data$Acute_MI==0]
 
-Res.UKBall.PLT <- glm(data$Acute_MI ~ predict(lm(data$PLT_initial_SD[data$Acute_MI==0]~g0), newdata=list(g0=g)), family = binomial)
+ivmodel.UKBall.PLT <- glm(data$Acute_MI ~ predict(lm(data$PLT_initial_SD[data$Acute_MI==0]~g0), newdata=list(g0=g)), family = binomial)
 
-summary(Res.UKBall.PLT)
+summary(ivmodel.UKBall.PLT)
+summary(ivmodel.UKBall.PLT)$coef[2] # 2SLS estimate 
+summary(ivmodel.UKBall.PLT)$coef[2,2] # Standard error of 2SLS estimate 
