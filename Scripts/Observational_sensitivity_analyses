@@ -26,7 +26,7 @@ UKBexpFunc<-function(dat,exposureCode, sitename, other=F,
   }
   
   #idenitfy all participants with specific ICD10 codes
-  exposure_cases<-dplyr::select(dat,projectID,get(cancer_col_start):get(cancer_col_fin))
+  exposure_cases<-dplyr::select(dat,projectID,get(exp_col_start):get(exp_col_fin))
   exposureDate<-dplyr::select(dat,projectID,get(date_col_start):get(date_col_fin))
   #rownames(exposure_cases)<-rownames(dat)
   #rownames(exposureDate)<-rownames(dat)
@@ -36,7 +36,7 @@ UKBexpFunc<-function(dat,exposureCode, sitename, other=F,
     return(dat)
     } else {
     
-  exposureDate2<-cancerDate[apply(cancers, 1, function(r) any(r %in% cancerCode)),]
+  exposureDate2<-exposureDate[apply(exposure_cases, 1, function(r) any(r %in% exposureCode)),]
     
   #this loop takes the exposure codes and dates and for each participant generates a list of dates that they were diagnosed with the exposure of interest
   exposureList<-as.list(NULL)
@@ -66,7 +66,7 @@ UKBexpFunc<-function(dat,exposureCode, sitename, other=F,
     #exposureList[[i]]<-c(person1C,as.Date(person1D,origin = "1992-03-31"))
   }
   
-  #create a dataframe of cancer diagnosis dates
+  #create a dataframe of exposure diagnosis dates
   
   exposureDF<-plyr::ldply(exposureList, rbind)
   maxC<-max(unlist(lapply(exposureList,length)))
