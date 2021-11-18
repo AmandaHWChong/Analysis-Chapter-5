@@ -19,7 +19,7 @@ UKBexpFunc<-function(dat,exposureCode, sitename, other=F,
   
   if (other ==T) {
     #generate list of ICDcodes not inlcuding those of interest
-    allICD<-unlist(dplyr::select(dat,get(cancer_col_start):get(cancer_col_fin)), use.names = F)
+    allICD<-unlist(dplyr::select(dat,get(exposure_col_start):get(exposure_col_fin)), use.names = F)
     allICD<-allICD[!is.na(allICD)]
     allICD<-allICD[!duplicated(allICD)]
     exposureCode<-allICD[!allICD %in% exposureCode]
