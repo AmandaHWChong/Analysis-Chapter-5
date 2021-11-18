@@ -11,7 +11,7 @@
 # date_col_start - first column of the ICD10 date variable
 # date_col_fin - last column of the ICD10 date variable
 
-UKBexpFunc<-function(dat,exposureCode, sitename, other=F, 
+UKBexpFunc<-function(dat=dat,exposureCode, sitename, other=F, 
                         exp_col_start="f.41270.0.0", 
                         exp_col_fin="f.41270.0.212", 
                         date_col_start ="f.41280.0.0", 
