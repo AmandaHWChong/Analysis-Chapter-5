@@ -63,7 +63,7 @@ UKBexpFunc<-function(dat,exposureCode, sitename, other=F,
       person1D<-as.Date(person1D,origin = "1992-03-31")
     }
     exposureList[[i]]<-paste(person1C,person1D, sep  = "/")
-    #exposureList[[i]]<-c(person1C,as.Date(person1D,origin = "1992-03-31"))
+    #exposureList[[i]]<-c(person1C,as.Date(person1D,origin = "1992-03-31")
   }
   
   #create a dataframe of exposure diagnosis dates
