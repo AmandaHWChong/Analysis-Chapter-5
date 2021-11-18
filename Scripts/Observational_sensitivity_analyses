@@ -63,14 +63,14 @@ UKBexpFunc<-function(dat,exposureCode, sitename, other=F,
       person1D<-as.Date(person1D,origin = "1992-03-31")
     }
     exposureList[[i]]<-paste(person1C,person1D, sep  = "/")
-    #cancerList[[i]]<-c(person1C,as.Date(person1D,origin = "1992-03-31"))
+    #exposureList[[i]]<-c(person1C,as.Date(person1D,origin = "1992-03-31"))
   }
   
   #create a dataframe of cancer diagnosis dates
   
   exposureDF<-plyr::ldply(exposureList, rbind)
   maxC<-max(unlist(lapply(exposureList,length)))
-  #exposureDF[,1:maxC]<-as.character(cancerDF[,1:maxC])
+  #exposureDF[,1:maxC]<-as.character(exposureDF[,1:maxC])
   colnames(exposureDF)<-paste0(sitename,1:maxC)
 
   
