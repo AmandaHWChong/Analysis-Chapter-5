@@ -73,7 +73,7 @@ library(ivreg)
 
 #Read in data
 data <- read.table("/projects/MRC-IEU/research/projects/ieu1/wp1/028/working/data/results/UKBB/Phenotypes/Platelet_phenotypes_and_medication/One_sample_MR/IEU_output_extracted_plateletphenotypes_acuteMI_mortalityafterMI_DVT_PE_covariates_PC40_noIDS_foronesampleMR", header = T) 
-PLT_GRS <- read.table("/projects/MRC-IEU/research/projects/ieu1/wp1/028/working/data/results/UKBB/Phenotypes/Platelet_phenotypes_and_medication/Input/PRS/HaemGen_PLT_GRS_chr1_22_UKBall", header = T) 
+PLT_PRS <- read.table("/projects/MRC-IEU/research/projects/ieu1/wp1/028/working/data/results/UKBB/Phenotypes/Platelet_phenotypes_and_medication/Input/PRS/HaemGen_PLT_GRS_chr1_22_UKBall", header = T) 
 
 #Extract names of variables
 variables<-names(data)
@@ -86,6 +86,14 @@ num.exposures<- 6 + 8
 
 #g is sum of allele scores 
 g = PLT_PRS$PLT_PRS 
+
+#Create data frame of each exposures of interest 
+t.plt.exp <- data[c("FID", "IID", "PLT_initial_SD")]
+t.mpv.exp <- data[c("FID", "IID", "MPV_initial_SD")]
+
+#Subset each exposure of interest by removing NAs
+t.plt.exp$PLT_initial_SD <- na.omit(t.plt.exp$PLT_initial_SD)
+t.mpv.exp$MPV_initial_SD <- na.omit(t.mpv.exp$MPV_initial_SD)
 
 #Create empty data frame for results
 res<-matrix( rep( 0, len= num.exposures^2), nrow = num.exposures)
