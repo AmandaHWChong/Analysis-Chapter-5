@@ -121,7 +121,7 @@ for(i in 1:ncol(res)){
     
     if(is.integer(data[,i])){
       
-      mod.t<-summary(glm(t.outcome ~ predict(lm(t.exposures[t.outcome==0]~t.g), newdata=list(g0=t.g)), data=data, family="binomial"))
+      mod.t<-summary(glm(t.outcome ~ predict(lm(t.exposures[t.outcome==0]~t.g), newdata=list(g0=t.g)), data=data, na.action=na.omit, family="binomial"))
       
       t.res[j]<-mod.t$coefficients[2,1]
       t.se[j]<-mod.t$coefficients[2,2]
@@ -129,7 +129,7 @@ for(i in 1:ncol(res)){
       
     }else{
       
-      mod.t<-summary(ivreg(t.outcome ~ t.exposures | PLT_PRS$PLT_PRS, x = TRUE))
+      mod.t<-summary(ivreg(t.outcome ~ t.exposures | PLT_PRS$PLT_PRS, na.action=na.omit, x = TRUE))
       
       t.res[j]<-mod.t$coefficients[2,1]
       t.se[j]<-mod.t$coefficients[2,2]
