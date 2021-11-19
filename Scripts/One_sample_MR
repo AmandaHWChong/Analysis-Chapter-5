@@ -39,14 +39,14 @@ t.mpv.dvt <- na.omit(t.mpv.dvt)
 t.mpv.pe <- na.omit(t.mpv.pe)
 
 #Match each subsetted dataframe with each PRS 
-t.plt.acuteMI.PLTPRS <- inner
-t.plt.mortalityMI.PLTPRS <- 
-t.plt.dvt.PLTPRS <- 
-t.plt.pe.PLTPRS <- 
-t.mpv.acuteMI.MPVPRS <- 
-t.mpv.mortalityMI.MPVPRS <- 
-t.mpv.dvt.MPVPRS <- 
-t.mpv.pe.MPVPRS <- 
+t.plt.acuteMI.PLTPRS <- inner_join(t.plt.acuteMI, PLT_PRS, by = c("FID", "IID"))
+t.plt.mortalityMI.PLTPRS <- inner_join(t.plt.mortalityMI, PLT_PRS, by = c("FID", "IID"))
+t.plt.dvt.PLTPRS <- inner_join(t.plt.dvt, PLT_PRS, by = c("FID", "IID"))
+t.plt.pe.PLTPRS <- inner_join(t.plt.pe, PLT_PRS, by = c("FID", "IID"))
+t.mpv.acuteMI.MPVPRS <- inner_join(t.mpv.acuteMI, MPV_PRS, by = c("FID", "IID"))
+t.mpv.mortalityMI.MPVPRS <- inner_join(t.mpv.mortalityMI, MPV_PRS, by = c("FID", "IID"))
+t.mpv.dvt.MPVPRS <- inner_join(t.mpv.dvt, MPV_PRS, by = c("FID", "IID"))
+t.mpv.pe.MPVPRS <- inner_join(t.mpv.pe, MPV_PRS, by = c("FID", "IID"))
 
 #Extract names of variables
 variables<-names(data)
