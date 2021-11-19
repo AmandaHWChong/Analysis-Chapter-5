@@ -128,6 +128,22 @@ t.tg <- na.omit(t.tg)
 t.sex <- na.omit(t.sex)
 t.age <- na.omit(t.age)
 
+#Subset PCs 
+t.PC40 <- data[c("FID", "IID", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
+
+#Remove NAs from PC 
+t.PC40 <- na.omit(t.PC40)
+
+#Match each outcome of interest with each exposure of interest
+t.plt.acuteMI <- inner_join(t.plt.exp, t.acuteMI.out, by = c("FID", "IID"))
+t.plt.mortalityMI <- inner_join(t.plt.exp, t.mortalityMI.out, by = c("FID", "IID"))
+t.plt.dvt <- inner_join(t.plt.exp, t.dvt.out, by = c("FID", "IID"))
+t.plt.pe <- inner_join(t.plt.exp, t.pe.out, by = c("FID", "IID"))
+t.mpv.acuteMI <- inner_join(t.mpv.exp, t.acuteMI.out, by = c("FID", "IID"))
+t.mpv.mortalityMI <- inner_join(t.mpv.exp, t.mortalityMI.out, by = c("FID", "IID"))
+t.mpv.dvt <- inner_join(t.mpv.exp, t.dvt.out, by = c("FID", "IID"))
+t.mpv.pe <- inner_join(t.mpv.exp, t.pe.out, by = c("FID", "IID"))
+
 #Match each covariate with each exposure of interest
 t.plt.alcintake <- inner_join(t.plt.exp, t.alcintake, by = c("FID", "IID"))
 t.plt.eversmoked <- inner_join(t.plt.exp, t.eversmoked, by = c("FID", "IID"))
@@ -146,15 +162,9 @@ t.mpv.tg <- inner_join(t.mpv.exp, t.tg, by = c("FID", "IID"))
 t.mpv.sex <- inner_join(t.mpv.exp, t.sex, by = c("FID", "IID"))
 t.mpv.age <- inner_join(t.mpv.exp, t.age, by = c("FID", "IID"))
 
-#Match each outcome of interest with each exposure of interest
-t.plt.acuteMI <- inner_join(t.plt.exp, t.acuteMI.out, by = c("FID", "IID"))
-t.plt.mortalityMI <- inner_join(t.plt.exp, t.mortalityMI.out, by = c("FID", "IID"))
-t.plt.dvt <- inner_join(t.plt.exp, t.dvt.out, by = c("FID", "IID"))
-t.plt.pe <- inner_join(t.plt.exp, t.pe.out, by = c("FID", "IID"))
-t.mpv.acuteMI <- inner_join(t.mpv.exp, t.acuteMI.out, by = c("FID", "IID"))
-t.mpv.mortalityMI <- inner_join(t.mpv.exp, t.mortalityMI.out, by = c("FID", "IID"))
-t.mpv.dvt <- inner_join(t.mpv.exp, t.dvt.out, by = c("FID", "IID"))
-t.mpv.pe <- inner_join(t.mpv.exp, t.pe.out, by = c("FID", "IID"))
+#Match PCs to each exposure of interest
+t.plt.PC40 <- inner_join(t.plt.exp, t.PC40, by = c("FID", "IID"))
+t.mpv.PC40 <- inner_join(t.mpv.exp, t.PC40, by = c("FID", "IID"))
 
 #Create empty data frame for results
 res<-matrix( rep( 0, len= num.exposures^2), nrow = num.exposures)
