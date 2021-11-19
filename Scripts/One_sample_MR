@@ -48,120 +48,53 @@ t.mpv.mortalityMI.MPVPRS <- inner_join(t.mpv.mortalityMI, MPV_PRS, by = c("FID",
 t.mpv.dvt.MPVPRS <- inner_join(t.mpv.dvt, MPV_PRS, by = c("FID", "IID"))
 t.mpv.pe.MPVPRS <- inner_join(t.mpv.pe, MPV_PRS, by = c("FID", "IID"))
 
-#Extract names of variables
-variables<-names(data)
+#2SLS analyses - Binary outcome 
+#In a two-stage analysis using a binary outcome (case-control setting) requires use of logistic regression with the inference on the controls only (where Y = 0). This can be performed by sequential regression using the 'predict' function 
 
-# Number of X1s plus adjusted covs not PCs
-# X1 + X2 + X3 + X4 (4)
-# A1 + A2 + A3 (3)  
+#Acute MI on platelet count 
+g = t.plt.acuteMI.PLTPRS$PLT_PRS 
 
-num.exposures<- 6 + 8
+g0=g[t.plt.acuteMI.PLTPRS$Acute_MI==0]
 
-#g is sum of allele scores 
-g = PLT_PRS$PLT_PRS 
+ivmodel.UKBall.PLT.acuteMI <- glm(t.plt.acuteMI.PLTPRS$Acute_MI ~ predict(lm(t.plt.acuteMI.PLTPRS$PLT_initial_SD[t.plt.acuteMI.PLTPRS$Acute_MI==0]~g0), newdata=list(g0=g)), family = binomial)
 
-#Create empty data frame for results
-res<-matrix( rep( 0, len= num.exposures^2), nrow = num.exposures)
-res.se<-matrix( rep( 0, len= num.exposures^2), nrow = num.exposures)
-res.pvalue<-matrix( rep( 0, len= num.exposures^2), nrow = num.exposures)
+summary(ivmodel.UKBall.PLT.acuteMI)
+summary(ivmodel.UKBall.PLT.acuteMI)$coef[2] # 2SLS estimate 
+summary(ivmodel.UKBall.PLT.acuteMI)$coef[2,2] # Standard error of 2SLS estimate 
 
-#Regress each variable on all other variables, saving results
-for(i in 1:ncol(res)){
-  
-  t.outcome<-variables[i]
-  
-  t.exposure.list<-variables[-i]
-     
-  t.res<-rep(0,(num.exposures-1))
-  
-  t.pvalue<-rep(0,(num.exposures-1))
-  
-  t.se<-rep(0,(num.exposures-1))
-     
-  for(j in 1:(num.exposures-1)){
-    
-    t.exposures<-paste(t.exposure.list[j])
-    
-    t.exposures<-paste(c(t.exposures,variables[(num.exposures-2):length(variables)]))
-    
-    t.exposures<-unique(t.exposures)
-    
-    t.exposures<-t.exposures[t.exposures!=t.outcome]
-            
-    t.exposures<-paste(t.exposures,collapse="+")
-    
-    t.g=g[t.outcome==0]
-    
-    if(is.integer(data[,i])){
-      
-      mod.t<-summary(glm(t.outcome ~ predict(lm(t.exposures[t.outcome==0]~t.g), newdata=list(g0=t.g)), data=data, family="binomial"))
-      
-      t.res[j]<-mod.t$coefficients[2,1]
-      t.se[j]<-mod.t$coefficients[2,2]
-      t.pvalue[j]<-mod.t$coefficients[2,4]
-      
-    }else{
-      
-      mod.t<-summary(ivreg(t.outcome ~ t.exposures | PLT_PRS$PLT_PRS, x = TRUE))
-      
-      t.res[j]<-mod.t$coefficients[2,1]
-      t.se[j]<-mod.t$coefficients[2,2]
-      t.pvalue[j]<-mod.t$coefficients[2,4]
-      
-    }
-    
-  }
-                         
-  #Making 1 on diagonal
-  
-  if(i == 1){
-    
-    t.res<-c(1,t.res)
-    t.se<-c(1,t.se)
-    t.pvalue<-c(1,t.pvalue)
-    
-  }
-  
-  if(i == num.exposures){
-    
-    t.res<-c(t.res,1)
-    t.se<-c(t.se,1)
-    t.pvalue<-c(t.pvalue,1)
-    
-  }
-  
-  if(i != 1 & i != num.exposures){
-    
-    t.res<-c(t.res[1:(i-1)],1,t.res[i:(num.exposures-1)])
-    t.se<-c(t.se[1:(i-1)],1,t.se[i:(num.exposures-1)])
-    t.pvalue<-c(t.pvalue[1:(i-1)],1,t.pvalue[i:(num.exposures-1)])
-    
-  }
-  
-  #Populating zero matrices
-  
-  res[,i]<-t.res
-  res.se[,i]<-t.se
-  res.pvalue[,i]<-t.pvalue
-  
-}
+#Mortality after MI on platelet count 
+g = t.plt.mortalityMI.PLTPRS$PLT_PRS 
 
-#Making it look pretty
+g0=g[t.plt.mortalityMI.PLTPRS$Mortality_MI==0]
 
-results<-data.frame(res)
+ivmodel.UKBall.PLT.mortalityMI <- glm(t.plt.mortalityMI.PLTPRS$Mortality_MI ~ predict(lm(t.plt.mortalityMI.PLTPRS$PLT_initial_SD[t.plt.mortalityMI.PLTPRS$Mortality_MI==0]~g0), newdata=list(g0=g)), family = binomial)
 
-names(results)<-variables[1:num.exposures]
+summary(ivmodel.UKBall.PLT.mortalityMI)
+summary(ivmodel.UKBall.PLT.mortalityMI)$coef[2] # 2SLS estimate 
+summary(ivmodel.UKBall.PLT.mortalityMI)$coef[2,2] # Standard error of 2SLS estimate 
 
-row.names(results)<-variables[1:num.exposures]
+#DVT on platelet count 
+g = t.plt.dvt.PLTPRS$PLT_PRS 
 
-se.data<-data.frame(res.se)
+g0=g[t.plt.dvt.PLTPRS$DVT==0]
 
-names(se.data)<-variables[1:num.exposures]
+ivmodel.UKBall.PLT.DVT <- glm(t.plt.dvt.PLTPRS$DVT ~ predict(lm(t.plt.dvt.PLTPRS$PLT_initial_SD[t.plt.dvt.PLTPRS$DVT==0]~g0), newdata=list(g0=g)), family = binomial)
 
-row.names(se.data)<-variables[1:num.exposures]
+summary(ivmodel.UKBall.PLT.DVT)
+summary(ivmodel.UKBall.PLT.DVT)$coef[2] # 2SLS estimate 
+summary(ivmodel.UKBall.PLT.DVT)$coef[2,2] # Standard error of 2SLS estimate 
 
-pval.data<-data.frame(res.pvalue)
+#PE on platelet count 
+g = t.plt.pe.PLTPRS$PLT_PRS 
 
-names(pval.data)<-variables[1:num.exposures]
+g0=g[t.plt.pe.PLTPRS$PE==0]
 
-row.names(pval.data)<-variables[1:num.exposures]
+ivmodel.UKBall.PLT.PE <- glm(t.plt.pe.PLTPRS$PE ~ predict(lm(t.plt.pe.PLTPRS$PLT_initial_SD[t.plt.pe.PLTPRS$PE==0]~g0), newdata=list(g0=g)), family = binomial)
+
+summary(ivmodel.UKBall.PLT.PE)
+summary(ivmodel.UKBall.PLT.PE)$coef[2] # 2SLS estimate 
+summary(ivmodel.UKBall.PLT.PE)$coef[2,2] # Standard error of 2SLS estimate
+
+
+
+
