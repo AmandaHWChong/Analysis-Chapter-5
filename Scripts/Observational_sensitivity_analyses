@@ -1,4 +1,4 @@
-#R function to extract exposures of interest from UK Biobank ICD10 data
+#R function to extract exposures of interest from UK Biobank ICD10 data derived from script created by Tom Dudding and Kimberley Burrows
 
 #As the observational analyses uses self-reported, ICD9, and ICD10 data to identify cases for exposure of interest, the analyses could be subject to reverse causation. Therefore sensitivity analyses will be performed by identifying cases after initial platelet phenotype measurements (platelet count and mean platelet volume) to identify any evidence of reverse causation. 
 #Exposures of interest: Acute myocardial infarction, deep vein thrombosis, pulmonary embolism 
