@@ -117,17 +117,27 @@ for(i in 1:ncol(res)){
     t.exposures<-paste(t.exposures,collapse="+")
     
     t.g=g[t.outcome==0]
-                         
-    mod.t<-summary(glm(t.outcome ~ predict(lm(t.exposures[t.outcome==0]~t.g), newdata=list(g0=t.g)), data=data, family="binomial"))
+    
+    if(is.integer(data[,i])){
+      
+      mod.t<-summary(glm(t.outcome ~ predict(lm(t.exposures[t.outcome==0]~t.g), newdata=list(g0=t.g)), data=data, family="binomial"))
       
       t.res[j]<-mod.t$coefficients[2,1]
       t.se[j]<-mod.t$coefficients[2,2]
       t.pvalue[j]<-mod.t$coefficients[2,4]
-         
+      
+    }else{
+      
+      mod.t<-summary(ivreg(t.outcome ~ t.exposures | PLT_GRS$SCORE1_AVG_CHR1 + PLT_GRS$SCORE1_AVG_CHR2 + PLT_GRS$SCORE1_AVG_CHR3 + PLT_GRS$SCORE1_AVG_CHR4 + PLT_GRS$SCORE1_AVG_CHR5 + PLT_GRS$SCORE1_AVG_CHR6 + PLT_GRS$SCORE1_AVG_CHR7 + PLT_GRS$SCORE1_AVG_CHR8 + PLT_GRS$SCORE1_AVG_CHR9 + PLT_GRS$SCORE1_AVG_CHR10 + PLT_GRS$SCORE1_AVG_CHR11 + PLT_GRS$SCORE1_AVG_CHR12 + PLT_GRS$SCORE1_AVG_CHR14 + PLT_GRS$SCORE1_AVG_CHR15 + PLT_GRS$SCORE1_AVG_CHR17 + PLT_GRS$SCORE1_AVG_CHR19, x = TRUE))
+      
+      t.res[j]<-mod.t$coefficients[2,1]
+      t.se[j]<-mod.t$coefficients[2,2]
+      t.pvalue[j]<-mod.t$coefficients[2,4]
+      
     }
     
   }
-  
+                         
   #Making 1 on diagonal
   
   if(i == 1){
