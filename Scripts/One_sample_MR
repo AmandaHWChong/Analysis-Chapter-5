@@ -93,8 +93,8 @@ t.plt.exp <- data[c("FID", "IID", "PLT_initial_SD")]
 t.mpv.exp <- data[c("FID", "IID", "MPV_initial_SD")]
 
 #Remove NAs from each subsetted exposure of interest
-t.plt.exp$PLT_initial_SD <- na.omit(t.plt.exp$PLT_initial_SD)
-t.mpv.exp$MPV_initial_SD <- na.omit(t.mpv.exp$MPV_initial_SD)
+t.plt.exp <- na.omit(t.plt.exp)
+t.mpv.exp <- na.omit(t.mpv.exp)
 
 #Subset each outcome of interest
 t.acuteMI.out <- data[c("FID", "IID", "Acute_MI")]
@@ -103,10 +103,10 @@ t.dvt.out <- data[c("FID", "IID", "DVT")]
 t.pe.out <- data[c("FID", "IID", "PE")]
 
 #Remove NAs from each subsetted outcome of interest 
-t.acuteMI.out$Acute_MI <- na.omit(t.acuteMI.out$Acute_MI)
-t.mortalityMI.out$Mortality_MI <- na.omit(t.mortalityMI.out$Mortality_MI)
-t.dvt.out$DVT <- na.omit(t.dvt.out$DVT)
-t.pe.out$PE <- na.omit(t.pe.out$PE)
+t.acuteMI.out <- na.omit(t.acuteMI.out)
+t.mortalityMI.out <- na.omit(t.mortalityMI.out$)
+t.dvt.out <- na.omit(t.dvt.out)
+t.pe.out <- na.omit(t.pe.out)
 
 #Subset each covariate 
 t.alcintake <- data[c("FID", "IID", "alcintakefreq_initialassessment")]
@@ -119,14 +119,14 @@ t.sex <- data[c("FID", "IID", "sex")]
 t.age <- data[c("FID", "IID", "age_initialrecruitment")]
 
 #Remove NAs from each covariate
-t.alcintake$alcintakefreq_initialassessment <- na.omit(t.alcintake$alcintakefreq_initialassessment)
-t.eversmoked$eversmoked_initialassessment <- na.omit(t.eversmoked$eversmoked_initialassessment)
-t.bmi$BMI_initialassessment <- na.omit(t.bmi$BMI_initialassessment)
-t.hdl$HDL_initialassessment <- na.omit(t.hdl$HDL_initialassessment)
-t.ldl$LDL_initialassessment <- na.omit(t.ldl$LDL_initialassessment)
-t.tg$triglycerides_initialassessment <- na.omit(t.tg$triglycerides_initialassessment)
-t.sex$sex <- na.omit(t.sex$sex)
-t.age$age_initialrecruitment <- na.omit(t.age$age_initialrecruitment)
+t.alcintake <- na.omit(t.alcintake)
+t.eversmoked <- na.omit(t.eversmoked)
+t.bmi <- na.omit(t.bmi)
+t.hdl <- na.omit(t.hdl)
+t.ldl <- na.omit(t.ldl)
+t.tg <- na.omit(t.tg)
+t.sex <- na.omit(t.sex)
+t.age <- na.omit(t.age)
 
 #Match each outcome of interest with each exposure of interest
 t.plt.acuteMI <- inner_join(t.plt.exp, t.acuteMI.out, by = c("FID", "IID"))
@@ -172,7 +172,7 @@ for(i in 1:ncol(res)){
     
     if(is.integer(data[,i])){
       
-      mod.t<-summary(glm(t.outcome ~ predict(lm(t.exposures[t.outcome==0]~t.g), newdata=list(g0=t.g)), data=data, na.action=na.omit, family="binomial"))
+      mod.t<-summary(glm(t.outcome ~ predict(lm(t.exposures[t.outcome==0]~t.g), newdata=list(g0=t.g)), data=data, family="binomial"))
       
       t.res[j]<-mod.t$coefficients[2,1]
       t.se[j]<-mod.t$coefficients[2,2]
@@ -180,7 +180,7 @@ for(i in 1:ncol(res)){
       
     }else{
       
-      mod.t<-summary(ivreg(t.outcome ~ t.exposures | PLT_PRS$PLT_PRS, na.action=na.omit, x = TRUE))
+      mod.t<-summary(ivreg(t.outcome ~ t.exposures | PLT_PRS$PLT_PRS, x = TRUE))
       
       t.res[j]<-mod.t$coefficients[2,1]
       t.se[j]<-mod.t$coefficients[2,2]
