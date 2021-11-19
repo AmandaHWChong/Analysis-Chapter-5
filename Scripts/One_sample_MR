@@ -95,6 +95,48 @@ summary(ivmodel.UKBall.PLT.PE)
 summary(ivmodel.UKBall.PLT.PE)$coef[2] # 2SLS estimate 
 summary(ivmodel.UKBall.PLT.PE)$coef[2,2] # Standard error of 2SLS estimate
 
+#Acute MI on mean platelet volume 
+g = t.mpv.acuteMI.MPVPRS$MPV_PRS 
 
+g0=g[t.mpv.acuteMI.MPVPRS$Acute_MI==0]
+
+ivmodel.UKBall.MPV.acuteMI <- glm(t.mpv.acuteMI.MPVPRS$Acute_MI ~ predict(lm(t.mpv.acuteMI.MPVPRS$MPV_initial_SD[t.mpv.acuteMI.MPVPRS$Acute_MI==0]~g0), newdata=list(g0=g)), family = binomial)
+
+summary(ivmodel.UKBall.MPV.acuteMI)
+summary(ivmodel.UKBall.MPV.acuteMI)$coef[2] # 2SLS estimate 
+summary(ivmodel.UKBall.MPV.acuteMI)$coef[2,2] # Standard error of 2SLS estimate
+
+#Mortality after MI on mean platelet volume 
+g = t.mpv.mortalityMI.MPVPRS$MPV_PRS 
+
+g0=g[t.mpv.mortalityMI.MPVPRS$Mortality_MI==0]
+
+ivmodel.UKBall.MPV.mortalityMI <- glm(t.mpv.mortalityMI.MPVPRS$Mortality_MI ~ predict(lm(t.mpv.mortalityMI.MPVPRS$MPV_initial_SD[t.mpv.mortalityMI.MPVPRS$Mortality_MI==0]~g0), newdata=list(g0=g)), family = binomial)
+
+summary(ivmodel.UKBall.MPV.mortalityMI)
+summary(ivmodel.UKBall.MPV.mortalityMI)$coef[2] # 2SLS estimate 
+summary(ivmodel.UKBall.MPV.mortalityMI)$coef[2,2] # Standard error of 2SLS estimate
+
+#DVT on mean platelet volume 
+g = t.mpv.dvt.MPVPRS$MPV_PRS 
+
+g0=g[t.mpv.dvt.MPVPRS$DVT==0]
+
+ivmodel.UKBall.MPV.DVT <- glm(t.mpv.dvt.MPVPRS$DVT ~ predict(lm(t.mpv.dvt.MPVPRS$MPV_initial_SD[t.mpv.dvt.MPVPRS$DVT==0]~g0), newdata=list(g0=g)), family = binomial)
+
+summary(ivmodel.UKBall.MPV.DVT)
+summary(ivmodel.UKBall.MPV.DVT)$coef[2] # 2SLS estimate 
+summary(ivmodel.UKBall.MPV.DVT)$coef[2,2] # Standard error of 2SLS estimate
+
+#PE on mean platelet volume 
+g = t.mpv.pe.MPVPRS$MPV_PRS 
+
+g0=g[t.mpv.pe.MPVPRS$PE==0]
+
+ivmodel.UKBall.MPV.PE <- glm(t.mpv.pe.MPVPRS$PE ~ predict(lm(t.mpv.pe.MPVPRS$MPV_initial_SD[t.mpv.pe.MPVPRS$PE==0]~g0), newdata=list(g0=g)), family = binomial)
+
+summary(ivmodel.UKBall.MPV.PE)
+summary(ivmodel.UKBall.MPV.PE)$coef[2] # 2SLS estimate 
+summary(ivmodel.UKBall.MPV.PE)$coef[2,2] # Standard error of 2SLS estimate
 
 
