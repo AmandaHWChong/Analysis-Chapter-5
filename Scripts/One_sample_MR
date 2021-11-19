@@ -109,14 +109,14 @@ t.dvt.out$DVT <- na.omit(t.dvt.out$DVT)
 t.pe.out$PE <- na.omit(t.pe.out$PE)
 
 #Match each outcome of interest with each exposure of interest
-t.plt.acuteMI <- left_join(t.plt.exp, t.acuteMI.out, by = c("FID", "IID"))
-t.plt.mortalityMI <- left_join(t.plt.exp, t.mortalityMI.out, by = c("FID", "IID"))
-t.plt.dvt <- left_join(t.plt.exp, t.dvt.out, by = c("FID", "IID"))
-t.plt.pe <- left_join(t.plt.exp, t.pe.out, by = c("FID", "IID"))
-t.mpv.acuteMI <- left_join(t.mpv.exp, t.acuteMI.out, by = c("FID", "IID"))
-t.mpv.mortalityMI <- left_join(t.mpv.exp, t.mortalityMI.out, by = c("FID", "IID"))
-t.mpv.dvt <- left_join(t.mpv.exp, t.dvt.out, by = c("FID", "IID"))
-t.mpv.pe <- left_join(t.mpv.exp, t.pe.out, by = c("FID", "IID"))
+t.plt.acuteMI <- inner_join(t.plt.exp, t.acuteMI.out, by = c("FID", "IID"))
+t.plt.mortalityMI <- inner_join(t.plt.exp, t.mortalityMI.out, by = c("FID", "IID"))
+t.plt.dvt <- inner_join(t.plt.exp, t.dvt.out, by = c("FID", "IID"))
+t.plt.pe <- inner_join(t.plt.exp, t.pe.out, by = c("FID", "IID"))
+t.mpv.acuteMI <- inner_join(t.mpv.exp, t.acuteMI.out, by = c("FID", "IID"))
+t.mpv.mortalityMI <- inner_join(t.mpv.exp, t.mortalityMI.out, by = c("FID", "IID"))
+t.mpv.dvt <- inner_join(t.mpv.exp, t.dvt.out, by = c("FID", "IID"))
+t.mpv.pe <- inner_join(t.mpv.exp, t.pe.out, by = c("FID", "IID"))
 
 #Create empty data frame for results
 res<-matrix( rep( 0, len= num.exposures^2), nrow = num.exposures)
