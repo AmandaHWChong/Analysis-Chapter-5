@@ -108,6 +108,26 @@ t.mortalityMI.out$Mortality_MI <- na.omit(t.mortalityMI.out$Mortality_MI)
 t.dvt.out$DVT <- na.omit(t.dvt.out$DVT)
 t.pe.out$PE <- na.omit(t.pe.out$PE)
 
+#Subset each covariate 
+t.alcintake <- data[c("FID", "IID", "alcintakefreq_initialassessment")]
+t.eversmoked <- data[c("FID", "IID", "eversmoked_initialassessment")]
+t.bmi <- data[c("FID", "IID", "BMI_initialassessment")]
+t.hdl <- data[c("FID", "IID", "HDL_initialassessment")]
+t.ldl <- data[c("FID", "IID", "LDL_initialassessment")]
+t.tg <- data[c("FID", "IID", "triglycerides_initialassessment")]
+t.sex <- data[c("FID", "IID", "sex")]
+t.age <- data[c("FID", "IID", "age_initialrecruitment")]
+
+#Remove NAs from each covariate
+t.alcintake$alcintakefreq_initialassessment <- na.omit(t.alcintake$alcintakefreq_initialassessment)
+t.eversmoked$eversmoked_initialassessment <- na.omit(t.eversmoked$eversmoked_initialassessment)
+t.bmi$BMI_initialassessment <- na.omit(t.bmi$BMI_initialassessment)
+t.hdl$HDL_initialassessment <- na.omit(t.hdl$HDL_initialassessment)
+t.ldl$LDL_initialassessment <- na.omit(t.ldl$LDL_initialassessment)
+t.tg$triglycerides_initialassessment <- na.omit(t.tg$triglycerides_initialassessment)
+t.sex$sex <- na.omit(t.sex$sex)
+t.age$age_initialrecruitment <- na.omit(t.age$age_initialrecruitment)
+
 #Match each outcome of interest with each exposure of interest
 t.plt.acuteMI <- inner_join(t.plt.exp, t.acuteMI.out, by = c("FID", "IID"))
 t.plt.mortalityMI <- inner_join(t.plt.exp, t.mortalityMI.out, by = c("FID", "IID"))
