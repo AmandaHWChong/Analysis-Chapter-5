@@ -66,7 +66,8 @@ summary(ivmodel.UKBall.PLT)$coef[2,2] # Standard error of 2SLS estimate
 
 
 
-#TEST#
+#2SLS analysis 
+
 #Read in relevant packages
 library(ivreg)
 
