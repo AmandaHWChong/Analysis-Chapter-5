@@ -129,7 +129,7 @@ for(i in 1:ncol(res)){
       
     }else{
       
-      mod.t<-summary(ivreg(t.outcome ~ t.exposures | PLT_GRS$SCORE1_AVG_CHR1 + PLT_GRS$SCORE1_AVG_CHR2 + PLT_GRS$SCORE1_AVG_CHR3 + PLT_GRS$SCORE1_AVG_CHR4 + PLT_GRS$SCORE1_AVG_CHR5 + PLT_GRS$SCORE1_AVG_CHR6 + PLT_GRS$SCORE1_AVG_CHR7 + PLT_GRS$SCORE1_AVG_CHR8 + PLT_GRS$SCORE1_AVG_CHR9 + PLT_GRS$SCORE1_AVG_CHR10 + PLT_GRS$SCORE1_AVG_CHR11 + PLT_GRS$SCORE1_AVG_CHR12 + PLT_GRS$SCORE1_AVG_CHR14 + PLT_GRS$SCORE1_AVG_CHR15 + PLT_GRS$SCORE1_AVG_CHR17 + PLT_GRS$SCORE1_AVG_CHR19, x = TRUE))
+      mod.t<-summary(ivreg(t.outcome ~ t.exposures | PLT_PRS$PLT_PRS, x = TRUE))
       
       t.res[j]<-mod.t$coefficients[2,1]
       t.se[j]<-mod.t$coefficients[2,2]
