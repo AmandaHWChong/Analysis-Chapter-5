@@ -76,18 +76,6 @@ library(dplyr)
 data <- read.table("/projects/MRC-IEU/research/projects/ieu1/wp1/028/working/data/results/UKBB/Phenotypes/Platelet_phenotypes_and_medication/One_sample_MR/IEU_UKBB_plateletphenotypes_acuteMI_mortalityafterMI_DVT_PE_covariates_PC40_withIDS_onesampleMRinput_FINAL", header = T) 
 PLT_PRS <- read.table("/projects/MRC-IEU/research/projects/ieu1/wp1/028/working/data/results/UKBB/Phenotypes/Platelet_phenotypes_and_medication/Input/PRS/HaemGen_PLT_PRS_chr1_22_input", header = T) 
 
-#Extract names of variables
-variables<-names(data)
-
-# Number of X1s plus adjusted covs not PCs
-# X1 + X2 + X3 + X4 (4)
-# A1 + A2 + A3 (3)  
-
-num.exposures<- 6 + 8
-
-#g is sum of allele scores 
-g = PLT_PRS$PLT_PRS 
-
 #Subset each exposures of interest 
 t.plt.exp <- data[c("FID", "IID", "PLT_initial_SD")]
 t.mpv.exp <- data[c("FID", "IID", "MPV_initial_SD")]
@@ -165,6 +153,18 @@ t.mpv.age <- inner_join(t.mpv.exp, t.age, by = c("FID", "IID"))
 #Match PCs to each exposure of interest
 t.plt.PC40 <- inner_join(t.plt.exp, t.PC40, by = c("FID", "IID"))
 t.mpv.PC40 <- inner_join(t.mpv.exp, t.PC40, by = c("FID", "IID"))
+
+#Extract names of variables
+variables<-names(data)
+
+# Number of X1s plus adjusted covs not PCs
+# X1 + X2 + X3 + X4 (4)
+# A1 + A2 + A3 (3)  
+
+num.exposures<- 6 + 8
+
+#g is sum of allele scores 
+g = PLT_PRS$PLT_PRS 
 
 #Create empty data frame for results
 res<-matrix( rep( 0, len= num.exposures^2), nrow = num.exposures)
