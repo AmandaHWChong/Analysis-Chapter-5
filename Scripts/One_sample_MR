@@ -53,7 +53,7 @@ PLT_GRS <- read.table("/projects/MRC-IEU/research/projects/ieu1/wp1/028/working/
 #2SLS analyses - Binary outcome
 #In a two-stage analysis using a binary outcome (case-control setting) requires use of logistic regression with the inference on the controls only (where Y = 0). This can be performed by sequential regression using the 'predict' function 
 
-g = PLT_GRS$PLT_GRS 
+g = PLT_PRS$PLT_PRS 
 
 g0=g[data$Acute_MI==0]
 
@@ -85,7 +85,7 @@ variables<-names(data)
 num.exposures<- 6 + 8
 
 #g is sum of allele scores 
-g = PLT_GRS$PLT_GRS 
+g = PLT_PRS$PLT_PRS 
 
 #Create empty data frame for results
 res<-matrix( rep( 0, len= num.exposures^2), nrow = num.exposures)
