@@ -70,6 +70,7 @@ summary(ivmodel.UKBall.PLT)$coef[2,2] # Standard error of 2SLS estimate
 
 #Read in relevant packages
 library(ivreg)
+library(dplyr)
 
 #Read in data
 data <- read.table("/projects/MRC-IEU/research/projects/ieu1/wp1/028/working/data/results/UKBB/Phenotypes/Platelet_phenotypes_and_medication/One_sample_MR/IEU_output_extracted_plateletphenotypes_acuteMI_mortalityafterMI_DVT_PE_covariates_PC40_noIDS_foronesampleMR", header = T) 
@@ -87,13 +88,35 @@ num.exposures<- 6 + 8
 #g is sum of allele scores 
 g = PLT_PRS$PLT_PRS 
 
-#Create data frame of each exposures of interest 
+#Subset each exposures of interest 
 t.plt.exp <- data[c("FID", "IID", "PLT_initial_SD")]
 t.mpv.exp <- data[c("FID", "IID", "MPV_initial_SD")]
 
-#Subset each exposure of interest by removing NAs
+#Remove NAs from each subsetted exposure of interest
 t.plt.exp$PLT_initial_SD <- na.omit(t.plt.exp$PLT_initial_SD)
 t.mpv.exp$MPV_initial_SD <- na.omit(t.mpv.exp$MPV_initial_SD)
+
+#Subset each outcome of interest
+t.acuteMI.out <- data[c("FID", "IID", "Acute_MI")]
+t.mortalityMI.out <- data[c("FID", "IID", "Mortality_MI")]
+t.dvt.out <- data[c("FID", "IID", "DVT")]
+t.pe.out <- data[c("FID", "IID", "PE")]
+
+#Remove NAs from each subsetted outcome of interest 
+t.acuteMI.out$Acute_MI <- na.omit(t.acuteMI.out$Acute_MI)
+t.mortalityMI.out$Mortality_MI <- na.omit(t.mortalityMI.out$Mortality_MI)
+t.dvt.out$DVT <- na.omit(t.dvt.out$DVT)
+t.pe.out$PE <- na.omit(t.pe.out$PE)
+
+#Match each outcome of interest with each exposure of interest
+t.plt.acuteMI <- left_join(t.plt.exp, t.acuteMI.out, by = c("FID", "IID"))
+t.plt.mortalityMI <- left_join(t.plt.exp, t.mortalityMI.out, by = c("FID", "IID"))
+t.plt.dvt <- left_join(t.plt.exp, t.dvt.out, by = c("FID", "IID"))
+t.plt.pe <- left_join(t.plt.exp, t.pe.out, by = c("FID", "IID"))
+t.mpv.acuteMI <- left_join(t.mpv.exp, t.acuteMI.out, by = c("FID", "IID"))
+t.mpv.mortalityMI <- left_join(t.mpv.exp, t.mortalityMI.out, by = c("FID", "IID"))
+t.mpv.dvt <- left_join(t.mpv.exp, t.dvt.out, by = c("FID", "IID"))
+t.mpv.pe <- left_join(t.mpv.exp, t.pe.out, by = c("FID", "IID"))
 
 #Create empty data frame for results
 res<-matrix( rep( 0, len= num.exposures^2), nrow = num.exposures)
