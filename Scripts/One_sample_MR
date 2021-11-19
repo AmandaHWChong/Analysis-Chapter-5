@@ -73,8 +73,8 @@ library(ivreg)
 library(dplyr)
 
 #Read in data
-data <- read.table("/projects/MRC-IEU/research/projects/ieu1/wp1/028/working/data/results/UKBB/Phenotypes/Platelet_phenotypes_and_medication/One_sample_MR/IEU_output_extracted_plateletphenotypes_acuteMI_mortalityafterMI_DVT_PE_covariates_PC40_noIDS_foronesampleMR", header = T) 
-PLT_PRS <- read.table("/projects/MRC-IEU/research/projects/ieu1/wp1/028/working/data/results/UKBB/Phenotypes/Platelet_phenotypes_and_medication/Input/PRS/HaemGen_PLT_GRS_chr1_22_UKBall", header = T) 
+data <- read.table("/projects/MRC-IEU/research/projects/ieu1/wp1/028/working/data/results/UKBB/Phenotypes/Platelet_phenotypes_and_medication/One_sample_MR/IEU_UKBB_plateletphenotypes_acuteMI_mortalityafterMI_DVT_PE_covariates_PC40_withIDS_onesampleMRinput_FINAL", header = T) 
+PLT_PRS <- read.table("/projects/MRC-IEU/research/projects/ieu1/wp1/028/working/data/results/UKBB/Phenotypes/Platelet_phenotypes_and_medication/Input/PRS/HaemGen_PLT_GRS_chr1_22_input", header = T) 
 
 #Extract names of variables
 variables<-names(data)
