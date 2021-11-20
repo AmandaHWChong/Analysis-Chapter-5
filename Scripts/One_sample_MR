@@ -316,3 +316,94 @@ ivmodel.clopidogrelonly.MPV.PE <- glm(t.mpv.pe.MPVPRS$PE ~ predict(lm(t.mpv.pe.M
 summary(ivmodel.clopidogrelonly.MPV.PE)
 summary(ivmodel.clopidogrelonly.MPV.PE)$coef[2] # 2SLS estimate 
 summary(ivmodel.clopidogrelonly.MPV.PE)$coef[2,2] # Standard error of 2SLS estimate
+
+#2SLS analyses - Binary outcome - Participants taking aspirin and clopidogrel only
+#Acute MI on platelet count 
+g = t.plt.acuteMI.PLTPRS$PLT_PRS 
+
+g0=g[t.plt.acuteMI.PLTPRS$Acute_MI==0]
+
+ivmodel.aspirinandclopidogrel.PLT.acuteMI <- glm(t.plt.acuteMI.PLTPRS$Acute_MI ~ predict(lm(t.plt.acuteMI.PLTPRS$PLT_initial_SD[t.plt.acuteMI.PLTPRS$Acute_MI==0]~g0), newdata=list(g0=g)), family = binomial)
+
+summary(ivmodel.aspirinandclopidogrel.PLT.acuteMI)
+summary(ivmodel.aspirinandclopidogrel.PLT.acuteMI)$coef[2] # 2SLS estimate 
+summary(ivmodel.aspirinandclopidogrel.PLT.acuteMI)$coef[2,2] # Standard error of 2SLS estimate 
+
+#Mortality after MI on platelet count 
+g = t.plt.mortalityMI.PLTPRS$PLT_PRS 
+
+g0=g[t.plt.mortalityMI.PLTPRS$Mortality_MI==0]
+
+ivmodel.aspirinandclopidogrel.PLT.mortalityMI <- glm(t.plt.mortalityMI.PLTPRS$Mortality_MI ~ predict(lm(t.plt.mortalityMI.PLTPRS$PLT_initial_SD[t.plt.mortalityMI.PLTPRS$Mortality_MI==0]~g0), newdata=list(g0=g)), family = binomial)
+
+summary(ivmodel.aspirinandclopidogrel.PLT.mortalityMI)
+summary(ivmodel.aspirinandclopidogrel.PLT.mortalityMI)$coef[2] # 2SLS estimate 
+summary(ivmodel.aspirinandclopidogrel.PLT.mortalityMI)$coef[2,2] # Standard error of 2SLS estimate 
+
+#DVT on platelet count 
+g = t.plt.dvt.PLTPRS$PLT_PRS 
+
+g0=g[t.plt.dvt.PLTPRS$DVT==0]
+
+ivmodel.aspirinandclopidogrel.PLT.DVT <- glm(t.plt.dvt.PLTPRS$DVT ~ predict(lm(t.plt.dvt.PLTPRS$PLT_initial_SD[t.plt.dvt.PLTPRS$DVT==0]~g0), newdata=list(g0=g)), family = binomial)
+
+summary(ivmodel.aspirinandclopidogrel.PLT.DVT)
+summary(ivmodel.aspirinandclopidogrel.PLT.DVT)$coef[2] # 2SLS estimate 
+summary(ivmodel.aspirinandclopidogrel.PLT.DVT)$coef[2,2] # Standard error of 2SLS estimate 
+
+#PE on platelet count 
+g = t.plt.pe.PLTPRS$PLT_PRS 
+
+g0=g[t.plt.pe.PLTPRS$PE==0]
+
+ivmodel.aspirinandclopidogrel.PLT.PE <- glm(t.plt.pe.PLTPRS$PE ~ predict(lm(t.plt.pe.PLTPRS$PLT_initial_SD[t.plt.pe.PLTPRS$PE==0]~g0), newdata=list(g0=g)), family = binomial)
+
+summary(ivmodel.aspirinandclopidogrel.PLT.PE)
+summary(ivmodel.aspirinandclopidogrel.PLT.PE)$coef[2] # 2SLS estimate 
+summary(ivmodel.aspirinandclopidogrel.PLT.PE)$coef[2,2] # Standard error of 2SLS estimate
+
+#Acute MI on mean platelet volume 
+g = t.mpv.acuteMI.MPVPRS$MPV_PRS 
+
+g0=g[t.mpv.acuteMI.MPVPRS$Acute_MI==0]
+
+ivmodel.aspirinandclopidogrel.MPV.acuteMI <- glm(t.mpv.acuteMI.MPVPRS$Acute_MI ~ predict(lm(t.mpv.acuteMI.MPVPRS$MPV_initial_SD[t.mpv.acuteMI.MPVPRS$Acute_MI==0]~g0), newdata=list(g0=g)), family = binomial)
+
+summary(ivmodel.aspirinandclopidogrel.MPV.acuteMI)
+summary(ivmodel.aspirinandclopidogrel.MPV.acuteMI)$coef[2] # 2SLS estimate 
+summary(ivmodel.aspirinandclopidogrel.MPV.acuteMI)$coef[2,2] # Standard error of 2SLS estimate
+
+#Mortality after MI on mean platelet volume 
+g = t.mpv.mortalityMI.MPVPRS$MPV_PRS 
+
+g0=g[t.mpv.mortalityMI.MPVPRS$Mortality_MI==0]
+
+ivmodel.aspirinandclopidogrel.MPV.mortalityMI <- glm(t.mpv.mortalityMI.MPVPRS$Mortality_MI ~ predict(lm(t.mpv.mortalityMI.MPVPRS$MPV_initial_SD[t.mpv.mortalityMI.MPVPRS$Mortality_MI==0]~g0), newdata=list(g0=g)), family = binomial)
+
+summary(ivmodel.aspirinandclopidogrel.MPV.mortalityMI)
+summary(ivmodel.aspirinandclopidogrel.MPV.mortalityMI)$coef[2] # 2SLS estimate 
+summary(ivmodel.aspirinandclopidogrel.MPV.mortalityMI)$coef[2,2] # Standard error of 2SLS estimate
+
+#DVT on mean platelet volume 
+g = t.mpv.dvt.MPVPRS$MPV_PRS 
+
+g0=g[t.mpv.dvt.MPVPRS$DVT==0]
+
+ivmodel.aspirinandclopidogrel.MPV.DVT <- glm(t.mpv.dvt.MPVPRS$DVT ~ predict(lm(t.mpv.dvt.MPVPRS$MPV_initial_SD[t.mpv.dvt.MPVPRS$DVT==0]~g0), newdata=list(g0=g)), family = binomial)
+
+summary(ivmodel.aspirinandclopidogrel.MPV.DVT)
+summary(ivmodel.aspirinandclopidogrel.MPV.DVT)$coef[2] # 2SLS estimate 
+summary(ivmodel.aspirinandclopidogrel.MPV.DVT)$coef[2,2] # Standard error of 2SLS estimate
+
+#PE on mean platelet volume 
+g = t.mpv.pe.MPVPRS$MPV_PRS 
+
+g0=g[t.mpv.pe.MPVPRS$PE==0]
+
+ivmodel.aspirinandclopidogrel.MPV.PE <- glm(t.mpv.pe.MPVPRS$PE ~ predict(lm(t.mpv.pe.MPVPRS$MPV_initial_SD[t.mpv.pe.MPVPRS$PE==0]~g0), newdata=list(g0=g)), family = binomial)
+
+summary(ivmodel.aspirinandclopidogrel.MPV.PE)
+summary(ivmodel.aspirinandclopidogrel.MPV.PE)$coef[2] # 2SLS estimate 
+summary(ivmodel.aspirinandclopidogrel.MPV.PE)$coef[2,2] # Standard error of 2SLS estimate
+
+
