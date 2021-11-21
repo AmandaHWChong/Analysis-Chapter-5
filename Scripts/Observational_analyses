@@ -1,150 +1,27 @@
- #Read in data
-data <- read.table("UKBBall_riskfactors", header = T, stringsAsFactors = F)
+#Observational analysis 
 
-#Convert all binary outcomes to factors and ordinal outcomes to numeric 
-data$sex <- factor(data$sex)
-data$eversmoked_initialassessment <- factor(data$eversmoked_initialassessment)
-data$alcintakefreq_initialassessment <- as.numeric(data$alcintakefreq_initialassessment)
-data$PE <- factor(data$PE)  
-data$DVT <- factor(data$DVT)
-data$Acute_MI <- factor(data$Acute_MI)  
-data$Mortality_MI <- factor(data$Mortality_MI) #Mortality afte MI outcome 
-data$age_initialrecruitment <- as.numeric(data$age_initialrecruitment)
+#Read in relevant packages
+library(dplyr)
 
-#Extract names of variables
-variables<-names(data)
-
-# Number of X1s plus adjusted covs not PCs
-# X1 + X2 + X3 + X4 (4)
-# A1 + A2 + A3 (3)  
-
-num.exposures<- 6 + 8
-
-#Create empty data frame for results
-res<-matrix( rep( 0, len= num.exposures^2), nrow = num.exposures)
-res.se<-matrix( rep( 0, len= num.exposures^2), nrow = num.exposures)
-res.pvalue<-matrix( rep( 0, len= num.exposures^2), nrow = num.exposures)
-
-#Regress each variable on all other variables, saving results
-for(i in 1:ncol(res)){
-  
-  t.outcome<-variables[i]
-  
-  t.exposure.list<-variables[-i]
-  
-  t.res<-rep(0,(num.exposures-1))
-  
-  t.pvalue<-rep(0,(num.exposures-1))
-  
-  t.se<-rep(0,(num.exposures-1))
-  
-  for(j in 1:(num.exposures-1)){
-    
-    t.exposures<-paste(t.exposure.list[j])
-    
-    t.exposures<-paste(c(t.exposures,variables[(num.exposures-2):length(variables)]))
-    
-    t.exposures<-unique(t.exposures)
-    
-    t.exposures<-t.exposures[t.exposures!=t.outcome]
-    
-    t.exposures<-paste(t.exposures,collapse="+")
-    
-    t.formula<-as.formula(paste(t.outcome,t.exposures,sep="~"))
-    
-    if(is.factor(data[,i])){
-      
-      mod.t<-summary(glm(t.formula,data=data,family="binomial"))
-      
-      t.res[j]<-mod.t$coefficients[2,1]
-      t.se[j]<-mod.t$coefficients[2,2]
-      t.pvalue[j]<-mod.t$coefficients[2,4]
-      
-    }else{
-      
-      mod.t<-summary(lm(t.formula,data=data))
-      
-      t.res[j]<-mod.t$coefficients[2,1]
-      t.se[j]<-mod.t$coefficients[2,2]
-      t.pvalue[j]<-mod.t$coefficients[2,4]
-      
-    }
-    
-  }
-  
-  #Making 1 on diagonal
-  
-  if(i == 1){
-    
-    t.res<-c(1,t.res)
-    t.se<-c(1,t.se)
-    t.pvalue<-c(1,t.pvalue)
-    
-  }
-  
-  if(i == num.exposures){
-    
-    t.res<-c(t.res,1)
-    t.se<-c(t.se,1)
-    t.pvalue<-c(t.pvalue,1)
-    
-  }
-  
-  if(i != 1 & i != num.exposures){
-    
-    t.res<-c(t.res[1:(i-1)],1,t.res[i:(num.exposures-1)])
-    t.se<-c(t.se[1:(i-1)],1,t.se[i:(num.exposures-1)])
-    t.pvalue<-c(t.pvalue[1:(i-1)],1,t.pvalue[i:(num.exposures-1)])
-    
-  }
-  
-  #Populating zero matrices
-  
-  res[,i]<-t.res
-  res.se[,i]<-t.se
-  res.pvalue[,i]<-t.pvalue
-  
-}
-
-#Making it look pretty
-
-results<-data.frame(res)
-
-names(results)<-variables[1:num.exposures]
-
-row.names(results)<-variables[1:num.exposures]
-
-se.data<-data.frame(res.se)
-
-names(se.data)<-variables[1:num.exposures]
-
-row.names(se.data)<-variables[1:num.exposures]
-
-pval.data<-data.frame(res.pvalue)
-
-names(pval.data)<-variables[1:num.exposures]
-
-row.names(pval.data)<-variables[1:num.exposures]
-
-
-STUFF
+#Read in data
+data <- read.table("/projects/MRC-IEU/research/projects/ieu1/wp1/028/working/data/results/UKBB/Phenotypes/Platelet_phenotypes_and_medication/One_sample_MR/IEU_UKBB_plateletphenotypes_acuteMI_mortalityafterMI_DVT_PE_covariates_PC40_withIDS_onesampleMRinput_FINAL", header = T) 
 
 #Subset each exposures of interest with each outcome of interest, plus covariates and PC
-t.plt.acuteMI <- data[c("FID", "IID", "PLT_initial_SD", "Acute_MI", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
+t.plt.acuteMI <- data[c("FID", "IID", "PLT_initial_SD", "Acute_MI")]
 
-t.plt.mortalityMI <- data[c("FID", "IID", "PLT_initial_SD", "Mortality_MI", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
+t.plt.mortalityMI <- data[c("FID", "IID", "PLT_initial_SD", "Mortality_MI")]
 
-t.plt.dvt <- data[c("FID", "IID", "PLT_initial_SD", "DVT", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
+t.plt.dvt <- data[c("FID", "IID", "PLT_initial_SD", "DVT")]
 
-t.plt.pe <- data[c("FID", "IID", "PLT_initial_SD", "PE", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
+t.plt.pe <- data[c("FID", "IID", "PLT_initial_SD", "PE")]
 
-t.mpv.acuteMI <- data[c("FID", "IID", "MPV_initial_SD", "Acute_MI", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
+t.mpv.acuteMI <- data[c("FID", "IID", "MPV_initial_SD", "Acute_MI")]
 
-t.mpv.mortalityMI <- data[c("FID", "IID", "MPV_initial_SD", "Mortality_MI", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
+t.mpv.mortalityMI <- data[c("FID", "IID", "MPV_initial_SD", "Mortality_MI")]
 
-t.mpv.dvt <- data[c("FID", "IID", "MPV_initial_SD", "DVT", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
+t.mpv.dvt <- data[c("FID", "IID", "MPV_initial_SD", "DVT")]
 
-t.mpv.pe <- data[c("FID", "IID", "MPV_initial_SD", "PE", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
+t.mpv.pe <- data[c("FID", "IID", "MPV_initial_SD", "PE")]
 
 #Remove NAs from each subsetted dataframe
 t.plt.acuteMI <- na.omit(t.plt.acuteMI)
@@ -156,13 +33,8 @@ t.mpv.mortalityMI <- na.omit(t.mpv.mortalityMI)
 t.mpv.dvt <- na.omit(t.mpv.dvt)
 t.mpv.pe <- na.omit(t.mpv.pe)
 
-#Match each subsetted dataframe with each PRS 
-t.plt.acuteMI.PLTPRS <- inner_join(t.plt.acuteMI, PLT_PRS, by = c("FID", "IID"))
-t.plt.mortalityMI.PLTPRS <- inner_join(t.plt.mortalityMI, PLT_PRS, by = c("FID", "IID"))
-t.plt.dvt.PLTPRS <- inner_join(t.plt.dvt, PLT_PRS, by = c("FID", "IID"))
-t.plt.pe.PLTPRS <- inner_join(t.plt.pe, PLT_PRS, by = c("FID", "IID"))
-t.mpv.acuteMI.MPVPRS <- inner_join(t.mpv.acuteMI, MPV_PRS, by = c("FID", "IID"))
-t.mpv.mortalityMI.MPVPRS <- inner_join(t.mpv.mortalityMI, MPV_PRS, by = c("FID", "IID"))
-t.mpv.dvt.MPVPRS <- inner_join(t.mpv.dvt, MPV_PRS, by = c("FID", "IID"))
-t.mpv.pe.MPVPRS <- inner_join(t.mpv.pe, MPV_PRS, by = c("FID", "IID"))
+#Perform logistic regression 
+#Acute MI on platelet count 
+obs.model.acuteMI.plt <- glm(Acute_MI ~ PLT_initial_SD + alcintakefreq_initialassessment + eversmoked_initialassessment + BMI_initialassessment + HDL_initialassessment + LDL_initialassessment + triglycerides_initialassessment + sex + age_initialrecruitment + PC1 + PC2 + PC3 + PC4 + PC5 + PC6 + PC7 + PC8 + PC9 + PC10 + PC11 + PC12 + PC13 + PC14 + PC15 + PC16 + PC17 + PC18 + PC19 + PC20 + PC21 + PC22 + PC23 + PC24 + PC25 + PC26 + PC27 + PC28 + PC29 + PC30 + PC31 + PC32 + PC33 + PC34 + PC35 + PC36 + PC37 + PC38 + PC39 + PC40, data = t.plt.acuteMI, family = "binomial")
 
+summary(obs.model.acuteMI.plt)
