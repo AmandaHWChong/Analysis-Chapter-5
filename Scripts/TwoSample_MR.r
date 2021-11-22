@@ -33,7 +33,7 @@ try(exposure <- clump_data(exposure))
 
 #Extract CVD outcomes 
 ao<-available_outcomes()
-id.cvd.out <- c("finn-a-I9_DVTANDPULM", "finn-a-I9_VTE", "ukb-b-12040")
+id.cvd.out <- c("ukb-b-3469", "ukb-b-12267", "ukb-b-18366") #UKBB acute MI, dvt, and pulmonary embolism 
 outcome_dat <- extract_outcome_data(snps = exposure$SNP, outcomes = id.cvd.out)
 
 #OR 
@@ -69,7 +69,7 @@ BetaXG   = exposure$BetaXG
 seBetaXG = exposure$seBetaXG 
 seBetaYG<-dat $se.outcome
 
-BXG             = abs(BetaXG)         # gene--exposure estimates are positive  
+BXG             = abs(BetaXG)         # gene-exposure estimates are positive  
 
 # Calculate F statistics
 # and I-squared statistics
@@ -121,4 +121,7 @@ mod2<-summary(mod.sim2)
 
 write.table(mod1, "SIMEX_correction_exposure_outcome_model_1", sep ="\t",col.names=T,row.names=F,quote=F) 
 write.table(mod2, "SIMEX_correction_exposure_outcome_model_2", sep ="\t",col.names=T,row.names=F,quote=F) 
+
+#MR-PRESSO 
+
 
