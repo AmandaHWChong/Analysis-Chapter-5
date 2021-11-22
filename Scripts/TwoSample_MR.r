@@ -1,6 +1,7 @@
-###Two-Sample MR of platelet phenotypes and platelet proteins on risk of CVD###
+###Two-Sample MR of platelet phenotypes and platelet proteins on risk of arterial and venous thrombotic events###
 ##Platelet phenotypes: Platelet count and mean platelet volume##
 ##Platelet proteins: P-selectin and P-selectin glycoprotein ligand 1##
+##Disease outcomes: Acute MI, Mortality after MI, DVT, PE 
 
 #Install relevant packages 
 install.packages("remotes")
