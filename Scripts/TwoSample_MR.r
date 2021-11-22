@@ -51,6 +51,12 @@ Res_hetero <- mr_heterogeneity(dat) #
 Res_single <- mr_singlesnp(dat) #single SNP analysis
 or_results_res <- generate_odds_ratios(Res) #Odds ratio 
 Res_MR_PRESSO <- run_mr_presso(dat) #Run if there is evidence of heterogeneity in Res_hetero findings 
+Res_mr_leaveoneout <- mr_leaveoneout(dat, parameters = default_parameters(), method = mr_ivw)
+
+#Plot MR-leave one out 
+png("MR_leaveoneout_exposure_outcome.png", width = 4, height = 4, units = 'in', res = 300)
+mr_leaveoneout_plot(Res_mr_leaveoneout)
+dev.off()
 
 #Write results 
 write.table(Res,"MR_exposure_outcome",sep="\t",col.names=T,row.names=F,quote=F)
@@ -121,7 +127,3 @@ mod2<-summary(mod.sim2)
 
 write.table(mod1, "SIMEX_correction_exposure_outcome_model_1", sep ="\t",col.names=T,row.names=F,quote=F) 
 write.table(mod2, "SIMEX_correction_exposure_outcome_model_2", sep ="\t",col.names=T,row.names=F,quote=F) 
-
-#MR-PRESSO 
-
-
