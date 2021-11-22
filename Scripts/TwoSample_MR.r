@@ -33,7 +33,7 @@ try(exposure <- clump_data(exposure))
 
 #Extract CVD outcomes 
 ao<-available_outcomes()
-id.cvd.out <- c("ukb-b-3469", "ukb-b-12267", "ukb-b-18366") #UKBB acute MI, dvt, and pulmonary embolism 
+id.cvd.out <- c("finn-b-I9_MI", "finn-b-I9_PHLETHROMBDVTLOW", "finn-b-I9_PULMEMB") #FinnGen MI, DVT, PE
 outcome_dat <- extract_outcome_data(snps = exposure$SNP, outcomes = id.cvd.out)
 
 #OR 
