@@ -74,7 +74,7 @@ exposure$BetaXG<- exposure$beta.exposure
 exposure$seBetaXG<- exposure$se.exposure
 BetaXG   = exposure$BetaXG
 seBetaXG = exposure$seBetaXG 
-seBetaYG<-dat $se.outcome
+seBetaYG<-dat$se.outcome
 
 BXG             = abs(BetaXG)         # gene-exposure estimates are positive  
 
