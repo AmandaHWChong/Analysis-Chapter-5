@@ -56,7 +56,7 @@ g = t.plt.acuteMI.PLTPRS$PLT_PRS
 
 g0=g[t.plt.acuteMI.PLTPRS$Acute_MI==0]
 
-ivmodel.UKBall.PLT.acuteMI <- glm(t.plt.acuteMI.PLTPRS$Acute_MI ~ predict(lm(t.plt.acuteMI.PLTPRS$PLT_initial_SD[t.plt.acuteMI.PLTPRS$Acute_MI==0]~g0), newdata=list(g0=g)), family = binomial)
+ivmodel.UKBall.PLT.acuteMI <- glm(t.plt.acuteMI.PLTPRS$Acute_MI ~ predict(lm(t.plt.acuteMI.PLTPRS$PLT_initial_SD[t.plt.acuteMI.PLTPRS$Acute_MI==0]~g0 + add age sex and PC40)) + add age sex and PC40), newdata=list(g0=g)), family = binomial)
 
 summary(ivmodel.UKBall.PLT.acuteMI)
 summary(ivmodel.UKBall.PLT.acuteMI)$coef[2] # 2SLS estimate 
