@@ -1,2 +1,55 @@
 ###Instrumental variable regression###
 
+#Read in relevant packages 
+library(rsq) 
+library(dplyr)
+
+#Read in relevant data 
+data <- read.table("", header = T) 
+PLT_PRS_SD <- read.table("/projects/MRC-IEU/research/projects/ieu1/wp1/028/working/data/results/UKBB/Phenotypes/Platelet_phenotypes_and_medication/Input/PRS/HaemGen_PLT_PRS_chr1_22_input_FINAL", header = T)
+MPV_PRS_SD <- read.table("/projects/MRC-IEU/research/projects/ieu1/wp1/028/working/data/results/UKBB/Phenotypes/Platelet_phenotypes_and_medication/Input/PRS/HaemGen_MPV_PRS_chr1_22_input_FINAL", header = T) 
+
+#Subset each exposures of interest with each outcome of interest, plus covariates and PC
+t.plt.acuteMI <- data[c("FID", "IID", "PLT_initial_SD", "Acute_MI", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
+
+t.plt.mortalityMI <- data[c("FID", "IID", "PLT_initial_SD", "Mortality_MI", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
+
+t.plt.dvt <- data[c("FID", "IID", "PLT_initial_SD", "DVT", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
+
+t.plt.pe <- data[c("FID", "IID", "PLT_initial_SD", "PE", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
+
+t.mpv.acuteMI <- data[c("FID", "IID", "MPV_initial_SD", "Acute_MI", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
+
+t.mpv.mortalityMI <- data[c("FID", "IID", "MPV_initial_SD", "Mortality_MI", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
+
+t.mpv.dvt <- data[c("FID", "IID", "MPV_initial_SD", "DVT", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
+
+t.mpv.pe <- data[c("FID", "IID", "MPV_initial_SD", "PE", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
+
+#Subset each platelet PRS 
+t.plt.prs.sd <- PLT_PRS_SD[c("FID", "IID", "PLT_PRS_SD")]
+t.mpv.prs.sd <- MPV_PRS_SD[c("FID", "IID", "MPV_PRS_SD")] 
+
+#Join the two datasets 
+t.plt.acuteMI.prs <- full_join(t.plt.acuteMI, t.plt.prs.sd, by = c("FID", "IID")) 
+t.plt.mortalityMI.prs <- full_join(t.plt.mortalityMI, t.plt.prs.sd, by = c("FID", "IID")) 
+t.plt.dvt.prs <- full_join(t.plt.dvt, t.plt.prs.sd, by = c("FID", "IID")) 
+t.plt.pe.prs <- full_join(t.plt.pe, t.plt.prs.sd, by = c("FID", "IID")) 
+t.mpv.acuteMI.prs <- full_join(t.mpv.acuteMI, t.mpv.prs.sd, by = c("FID", "IID")) 
+t.mpv.mortalityMI.prs <- full_join(t.mpv.mortalityMI, t.mpv.prs.sd, by = c("FID", "IID")) 
+t.mpv.dvt.prs <- full_join(t.mpv.dvt.prs, t.mpv.prs.sd, by = c("FID", "IID")) 
+t.mpv.pe.prs <- full_join(t.mpv.pe.prs, t.mpv.prs.sd, by = c("FID", "IID")) 
+
+#Remove NAs from each subsetted dataframe
+t.plt.acuteMI.prs <- na.omit(t.plt.acuteMI)
+t.plt.mortalityMI.prs <- na.omit(t.plt.mortalityMI)
+t.plt.dvt.prs <- na.omit(t.plt.dvt)
+t.plt.pe.prs <- na.omit(t.plt.pe)
+t.mpv.acuteMI.prs <- na.omit(t.mpv.acuteMI)
+t.mpv.mortalityMI.prs <- na.omit(t.mpv.mortalityMI)
+t.mpv.dvt.prs <- na.omit(t.mpv.dvt)
+t.mpv.pe.prs <- na.omit(t.mpv.pe)
+
+
+
+
