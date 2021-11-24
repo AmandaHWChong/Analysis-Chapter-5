@@ -38,8 +38,8 @@ summary(model.pltprs.plt)$coef[2,2] # Standard error of IV estimate
 partial.r2.plt <- rsq.partial(model.pltprs.plt)
 
 #Calculate F statistic 
-exposure$BetaXG<- exposure$beta.exposure
-exposure$seBetaXG<- exposure$se.exposure
+t.plt.pltprs$BetaXG<- t.plt.pltprs$PLT_PRS_SD
+t.plt.pltprs$seBetaXG<- t.plt.pltprs$se.exposure
 BetaXG   = exposure$BetaXG
 seBetaXG = exposure$seBetaXG 
 
