@@ -37,33 +37,7 @@ done
 
 #Check to see if the PRS is standardised (i.e. Mean of 0 and SD of 1)
 
-###Perform one-sample MR###
 
-##UK Biobank Overall - Acute MI on Platelet count 
-
-#Install relevant R packages 
-install.packages("ivreg") 
-
-#Read in relevant packages
-library(ivreg) 
-
-#Read in files 
-data <- read.table("/projects/MRC-IEU/research/projects/ieu1/wp1/028/working/data/results/UKBB/Phenotypes/Platelet_phenotypes_and_medication/Model_selfreported_ICD9_ICD10/IEU_output_extracted_plateletphenotypes_acuteMI_mortalityafterMI_DVT_PE_covariates_PC40_withIDS_FINAL", header = T) 
-
-PLT_GRS <- read.table("/projects/MRC-IEU/research/projects/ieu1/wp1/028/working/data/results/UKBB/Phenotypes/Platelet_phenotypes_and_medication/Input/PRS/HaemGen_PLT_PRS_chr1_22", header = T) 
-
-#2SLS analyses - Binary outcome
-#In a two-stage analysis using a binary outcome (case-control setting) requires use of logistic regression with the inference on the controls only (where Y = 0). This can be performed by sequential regression using the 'predict' function 
-
-g = PLT_PRS$PLT_PRS 
-
-g0=g[data$Acute_MI==0]
-
-ivmodel.UKBall.PLT <- glm(data$Acute_MI ~ predict(lm(data$PLT_initial_SD[data$Acute_MI==0]~g0), newdata=list(g0=g)), family = binomial)
-
-summary(ivmodel.UKBall.PLT)
-summary(ivmodel.UKBall.PLT)$coef[2] # 2SLS estimate 
-summary(ivmodel.UKBall.PLT)$coef[2,2] # Standard error of 2SLS estimate 
 
 
 
