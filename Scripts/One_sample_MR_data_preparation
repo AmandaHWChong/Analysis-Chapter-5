@@ -35,6 +35,8 @@ done
 
 #Join using 'paste' files and keep columns: FID, IID and SCORE1_AVG_CHR(1-22) 
 
+#Check to see if the PRS is standardised (i.e. Mean of 0 and SD of 1)
+
 ###Perform one-sample MR###
 
 ##UK Biobank Overall - Acute MI on Platelet count 
