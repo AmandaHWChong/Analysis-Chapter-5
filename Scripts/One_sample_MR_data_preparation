@@ -37,6 +37,18 @@ done
 
 #Check to see if the PRS is standardised (i.e. Mean of 0 and SD of 1)
 
+awk '{if($19!=""){count++;sum+=$19};y+=$19^2} END{sq=sqrt(y/NR-(sum/NR)^2);sq=sq?sq:0;print "Mean = "sum/count ORS "S.D = ",sq}' HaemGen_PLT_PRS_chr1_22_input_FINAL
+awk '{if($20!=""){count++;sum+=$20};y+=$20^2} END{sq=sqrt(y/NR-(sum/NR)^2);sq=sq?sq:0;print "Mean = "sum/count ORS "S.D = ",sq}' HaemGen_MPV_PRS_chr1_22_input
+
+#If the mean and SD are not 0 and 1, respectively transform by: 
+awk '{$20 = ($19- mean)/SD}1' HaemGen_PLT_PRS_chr1_22_input > HaemGen_PLT_PRS_chr1_22_input_FINAL 
+awk '{if($20!=""){count++;sum+=$20};y+=$20^2} END{sq=sqrt(y/NR-(sum/NR)^2);sq=sq?sq:0;print "Mean = "sum/count ORS "S.D = ",sq}' HaemGen_PLT_PRS_chr1_22_input_FINAL #Check to see if it is now standardised
+
+awk '{$21 = ($20- mean)/SD}1' HaemGen_MPV_PRS_chr1_22_input > HaemGen_MPV_PRS_chr1_22_input_FINAL
+awk '{if($21!=""){count++;sum+=$21};y+=$21^2} END{sq=sqrt(y/NR-(sum/NR)^2);sq=sq?sq:0;print "Mean = "sum/count ORS "S.D = ",sq}' HaemGen_MPV_PRS_chr1_22_input_FINAL #Check to see if it is standardised
+
+
+
 
 
 
