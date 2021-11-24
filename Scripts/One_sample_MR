@@ -31,14 +31,14 @@ t.plt.prs.sd <- PLT_PRS_SD[c("FID", "IID", "PLT_PRS_SD")]
 t.mpv.prs.sd <- MPV_PRS_SD[c("FID", "IID", "MPV_PRS_SD")] 
 
 #Join the two datasets 
-t.plt.acuteMI.prs <- full_join(t.plt.acuteMI, t.plt.prs.sd, by = c("FID", "IID")) 
-t.plt.mortalityMI.prs <- full_join(t.plt.mortalityMI, t.plt.prs.sd, by = c("FID", "IID")) 
-t.plt.dvt.prs <- full_join(t.plt.dvt, t.plt.prs.sd, by = c("FID", "IID")) 
-t.plt.pe.prs <- full_join(t.plt.pe, t.plt.prs.sd, by = c("FID", "IID")) 
-t.mpv.acuteMI.prs <- full_join(t.mpv.acuteMI, t.mpv.prs.sd, by = c("FID", "IID")) 
-t.mpv.mortalityMI.prs <- full_join(t.mpv.mortalityMI, t.mpv.prs.sd, by = c("FID", "IID")) 
-t.mpv.dvt.prs <- full_join(t.mpv.dvt.prs, t.mpv.prs.sd, by = c("FID", "IID")) 
-t.mpv.pe.prs <- full_join(t.mpv.pe.prs, t.mpv.prs.sd, by = c("FID", "IID")) 
+t.plt.acuteMI.prs <- inner_join(t.plt.acuteMI, t.plt.prs.sd, by = c("FID", "IID")) 
+t.plt.mortalityMI.prs <- inner_join(t.plt.mortalityMI, t.plt.prs.sd, by = c("FID", "IID")) 
+t.plt.dvt.prs <- inner_join(t.plt.dvt, t.plt.prs.sd, by = c("FID", "IID")) 
+t.plt.pe.prs <- inner_join(t.plt.pe, t.plt.prs.sd, by = c("FID", "IID")) 
+t.mpv.acuteMI.prs <- inner_join(t.mpv.acuteMI, t.mpv.prs.sd, by = c("FID", "IID")) 
+t.mpv.mortalityMI.prs <- inner_join(t.mpv.mortalityMI, t.mpv.prs.sd, by = c("FID", "IID")) 
+t.mpv.dvt.prs <- inner_join(t.mpv.dvt.prs, t.mpv.prs.sd, by = c("FID", "IID")) 
+t.mpv.pe.prs <- inner_join(t.mpv.pe.prs, t.mpv.prs.sd, by = c("FID", "IID")) 
 
 #Remove NAs from each subsetted dataframe
 t.plt.acuteMI.prs <- na.omit(t.plt.acuteMI)
