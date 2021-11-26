@@ -253,5 +253,5 @@ dat <- read.table("output_extracted_41270_ICD10_41280_ICD10dates.tsv", header = 
 thrombotic_events_ICD10 <- read.table("thrombotic_events_ICD10") 
 
 #Run function 
-ICD10_thrombotic_events_of_interest <- UKBexpFunc(dat= dat, exposureCode = thrombotic_events_ICD10, sitename = "exp", other=F, exp_col = " f.41270.")
+ICD10_thrombotic_events_of_interest <- UKBexpFunc(dat= dat, exposureCode = thrombotic_events_ICD10, sitename = "exp", other=F, exp_col = "f.41270.")
 
