@@ -84,7 +84,3 @@ UKBexpFunc<-function(dat,exposureCode, sitename, other=F,
   return(fulldat)
     }
 }
-
-#Run analysis 
-res <- UKBexpFunc(dat) 
-
