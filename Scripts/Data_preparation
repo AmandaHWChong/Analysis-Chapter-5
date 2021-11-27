@@ -253,7 +253,7 @@ table(thrombotic_events_ICD10) #Check the codes of interest that were matched
 
 #Run function 
 res <- UKBexpFunc(dat= dat, exposureCode = thrombotic_events_ICD10, sitename = "thrombotic.events.ICD10", other=F, exp_col = "f.41270.")
-ICD10_res <- res %>% select("projectID", "geneticID", "f.31.0.0", "f.200.0.0", starts_with("thrombotic.events.ICD10"))
+ICD10_res <- res %>% select("projectID", "geneticID", "f.30082.0.0", "f.30102.0.0", starts_with("thrombotic.events.ICD10"))
 
 #Format results 
 # 1. split the ICD10 diagnoses: #ICD_code/date_of_diagnosis
