@@ -12,75 +12,75 @@
 # date_col_fin - last column of the ICD10 date variable
 
 UKBexpFunc<-function(dat,exposureCode, sitename, other=F, 
-                        exp_col_start= f.41270.0.0,
-                        exp_col_fin=f.41270.0.212,
-                        date_col_start = f.41280.0.0,
-                        date_col_fin =f.41280.0.225) {
+                        exp_col="f.41270.", 
+                        date_col ="f.41280.") { 
+## above CHANGED
   
   if (other ==T) {
-    #generate list of ICDcodes not inlcuding those of interest
-    allICD<-unlist(dplyr::select(dat,get(exp_col_start):get(exp_col_fin)), use.names = F)
+    #generate list of ICDcodes not including those of interest
+    allICD<-unlist(dplyr::select(dat,starts_with(exp_col)), use.names = F) ## CHANGED
     allICD<-allICD[!is.na(allICD)]
     allICD<-allICD[!duplicated(allICD)]
     exposureCode<-allICD[!allICD %in% exposureCode]
   }
+
   
-  #idenitfy all participants with specific ICD10 codes
-  exposure_cases<-dplyr::select(dat,projectID,get(exp_col_start):get(exp_col_fin))
-  exposureDate<-dplyr::select(dat,projectID,get(date_col_start):get(date_col_fin))
+  #identify all participants with specific ICD10 codes
+  exposure_cases<-dplyr::select(dat,projectID,starts_with(exp_col)) ## CHANGED
+  exposureDate<-dplyr::select(dat,projectID,starts_with(date_col)) ## CHANGED
   #rownames(exposure_cases)<-rownames(dat)
   #rownames(exposureDate)<-rownames(dat)
   exposures2<-exposure_cases[apply(exposure_cases, 1, function(r) any(r %in% exposureCode)),]
   if (length(exposures2$projectID)<1) {
     message("No exposure of this type")
     return(dat)
-    } else {
+  } else {
     
-  exposureDate2<-exposureDate[apply(exposure_cases, 1, function(r) any(r %in% exposureCode)),]
+    exposureDate2<-exposureDate[apply(exposure_cases, 1, function(r) any(r %in% exposureCode)),]
     
-  #this loop takes the exposure codes and dates and for each participant generates a list of dates that they were diagnosed with the exposure of interest
-  exposureList<-as.list(NULL)
-  for (i in 1:length(exposures2$projectID)) {
-    person1C<-unlist(exposures2[i,-1])
-    person1D<-as.Date(unlist(exposureDate2[i,-1]),origin = "1992-03-31") #also converts to r internal dates (number of days since 1992-03-31)
-    #set to missing non interest exposure codes
-    person1C<-ifelse(person1C %in% exposureCode,person1C,NA) #keeps the NAs
-    #person1C<-person1C[person1C %in% oral] #removes the NAs
-    #remove dates for exposure codes not interested in
-    person1D<-as.Date(ifelse(!is.na(person1C),person1D,NA),origin = "1992-03-31")
-    person1D<-as.Date(person1D[!is.na(person1C)],origin = "1992-03-31")
-     
-    #remove duplicated exposures
-    if (length(person1D)>1) {
-      person1C<-person1C[!duplicated(person1D)]
-      person1D<-as.Date(person1D[!duplicated(person1D)],origin = "1992-03-31")
-      #sort by earliest diagnosis first
-      iD <- order(person1D)
-      person1D<-as.Date(person1D[iD],origin = "1992-03-31")
-      person1C<-person1C[iD]
-            
-    } else {
-      person1D<-as.Date(person1D,origin = "1992-03-31")
+    #this loop takes the exposure codes and dates and for each participant generates a list of dates that they were diagnosed with the exposure of interest
+    exposureList<-as.list(NULL)
+    for (i in 1:length(exposures2$projectID)) {
+      person1C<-unlist(exposures2[i,-1])
+      person1D<-as.Date(unlist(exposureDate2[i,-1]),origin = "1992-03-31") #also converts to r internal dates (number of days since 1992-03-31)
+      #set to missing non interest exposure codes
+      person1C<-ifelse(person1C %in% exposureCode,person1C,NA) #keeps the NAs
+      #person1C<-person1C[person1C %in% oral] #removes the NAs
+      #remove dates for exposure codes not interested in
+      person1D<-as.Date(ifelse(!is.na(person1C),person1D,NA),origin = "1992-03-31")
+      person1D<-as.Date(person1D[!is.na(person1C)],origin = "1992-03-31")
+      
+      #remove duplicated exposures
+      if (length(person1D)>1) {
+        person1C<-person1C[!duplicated(person1D)]
+        person1D<-as.Date(person1D[!duplicated(person1D)],origin = "1992-03-31")
+        #sort by earliest diagnosis first
+        iD <- order(person1D)
+        person1D<-as.Date(person1D[iD],origin = "1992-03-31")
+        person1C<-person1C[iD]
+        
+      } else {
+        person1D<-as.Date(person1D,origin = "1992-03-31")
+      }
+      exposureList[[i]]<-paste(person1C,person1D, sep  = "/")
+      #exposureList[[i]]<-c(person1C,as.Date(person1D,origin = "1992-03-31")
     }
-    exposureList[[i]]<-paste(person1C,person1D, sep  = "/")
-    #exposureList[[i]]<-c(person1C,as.Date(person1D,origin = "1992-03-31")
+    
+    #create a dataframe of exposure diagnosis dates
+    
+    exposureDF<-plyr::ldply(exposureList, rbind)
+    maxC<-max(unlist(lapply(exposureList,length)))
+    #exposureDF[,1:maxC]<-as.character(exposureDF[,1:maxC])
+    colnames(exposureDF)<-paste0(sitename,1:maxC)
+    
+    
+    exposureDF$projectID<-exposures2$projectID ## CHANGED
+    
+    
+    
+    
+    #merge exposure data back into fulldataset
+    fulldat<-merge(dat,exposureDF, by="projectID", all.x = T)
+    return(fulldat)
   }
-  
-  #create a dataframe of exposure diagnosis dates
-  
-  exposureDF<-plyr::ldply(exposureList, rbind)
-  maxC<-max(unlist(lapply(exposureList,length)))
-  #exposureDF[,1:maxC]<-as.character(exposureDF[,1:maxC])
-  colnames(exposureDF)<-paste0(sitename,1:maxC)
-
-  
-  exposureDF$projectID<-exposure2$projectID
-  
-  
-  
-  
-  #merge exposure data back into fulldataset
-  fulldat<-merge(dat,exposureDF, by="projectID", all.x = T)
-  return(fulldat)
-    }
 }
