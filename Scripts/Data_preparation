@@ -252,5 +252,30 @@ thrombotic_events_ICD10 <- unique(grep(paste(toMatch,collapse="|"), allICD10, va
 table(thrombotic_events_ICD10) #Check the codes of interest that were matched
 
 #Run function 
-ICD10_thrombotic_events_of_interest <- UKBexpFunc(dat= dat, exposureCode = thrombotic_events_ICD10, sitename = "exp", other=F, exp_col = "f.41270.")
+res <- UKBexpFunc(dat= dat, exposureCode = thrombotic_events_ICD10, sitename = "thrombotic.events.ICD10", other=F, exp_col = "f.41270.")
+ICD10_res <- res %>% select("projectID", "geneticID", "f.31.0.0", "f.200.0.0", starts_with("thrombotic.events.ICD10"))
+
+#Format results 
+# 1. split the ICD10 diagnoses: #ICD_code/date_of_diagnosis
+# 2. format columns
+# 3. generate incidence of ICD10 flag
+# 4. define controls
+# 5. define incident cases
+# 6. define overall cases
+# 7. tidy up data
+
+library(tidyr); library(dplyr)
+rm(list=ls())
+
+df <- ICD10_res 
+rm(ICD10_res)
+df <- as.data.frame(df) 
+
+#Perform step 1 
+df2 <-separate(df2, thrombotic.events.ICD101, into = c("bladder.ICD10.1", "thromobtic.events.ICD10.date.diagnosis.1", sep = "/")
+df3 <-separate(df3, thrombotic.events.ICD102, into = c("bladder.ICD10.2", "thromobtic.events.ICD10.date.diagnosis.2", sep = "/")
+df4 <-separate(df4, thrombotic.events.ICD103, into = c("bladder.ICD10.3", "thromobtic.events.ICD10.date.diagnosis.3", sep = "/")
+
+
+
 
