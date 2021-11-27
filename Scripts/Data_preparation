@@ -8,7 +8,7 @@ library(plyr)
 library(dplyr)
 
 #Read in relevant data
-dat <- fread("output_extracted_41270_ICD10_41280_ICD10dates.tsv", header = T, sep = " ", na.strings = c("","NA"))
+dat <- fread("IEU_output_extracted_plateletphenotypes_SD_41270_ICD10_41280_ICD10dates.tsv", header = T, sep = " ", na.strings = c("","NA"))
 
 #Format date columns to r dates 
 dat$f.41280.0.0 <- as.Date(dat$f.41280.0.0)
