@@ -250,9 +250,6 @@ toMatch <- c("I210", "I211", "I212", "I213", "I214", "I219", "I801", "I802", "I2
 thrombotic_events_ICD10 <- unique(grep(paste(toMatch,collapse="|"), allICD10, value=TRUE))
 table(thrombotic_events_ICD10) #Check the codes of interest that were matched
 
-dat <- read.table("output_extracted_41270_ICD10_41280_ICD10dates.tsv", header = T)
-thrombotic_events_ICD10 <- read.table("thrombotic_events_ICD10") 
-
 #Run function 
 ICD10_thrombotic_events_of_interest <- UKBexpFunc(dat= dat, exposureCode = thrombotic_events_ICD10, sitename = "exp", other=F, exp_col = "f.41270.")
 
