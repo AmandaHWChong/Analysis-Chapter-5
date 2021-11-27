@@ -282,7 +282,7 @@ str(df_split, list.len=ncol(df_split))
 
 #Perform step 2 
 df_split$PLTinitialdates <- as.Date(df_split$PLT_dates_initial)
-date <- <- grepl("date", names(df_split))
+date <- grepl("date", names(df_split))
 df_split[,date] <-lapply(df_split[, date, drop=FALSE], as.Date)
 
 #Step 3
