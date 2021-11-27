@@ -4,11 +4,12 @@
 ##Prepare ICD10 codes of interest 
 #Read in relevant packages
 library(dplyr)
+library(data.table)
 
 #Read in relevant data
-dat <- read.table("output_extracted_41270_ICD10_41280_ICD10dates.tsv", header = T)
+dat <- fread("output_extracted_41270_ICD10_41280_ICD10dates.tsv", header = T, sep = " ", na.strings = c("","NA")
 
-#Convert date columns to r dates 
+#Format date columns to r dates 
 dat$f.41280.0.0 <- as.Date(dat$f.41280.0.0)
 dat$f.41280.0.1 <- as.Date(dat$f.41280.0.1)
 dat$f.41280.0.2 <- as.Date(dat$f.41280.0.2)
@@ -236,6 +237,9 @@ dat$f.41280.0.223 <- as.Date(dat$f.41280.0.223)
 dat$f.41280.0.224 <- as.Date(dat$f.41280.0.224)
 dat$f.41280.0.225 <- as.Date(dat$f.41280.0.225)
 
+#Load function
+source("UKBexpFunc.R")
+
 #All ICD10 data
 allICD10 <- unlist(dat %>% select(starts_with("f.41270.")), use.names=F) #this searches your columns for all unique values and lists them
 allICD10<-allICD10[!is.na(allICD10)] # removes NA
@@ -245,9 +249,6 @@ allICD10<-allICD10[!duplicated(allICD10)] # removes duplicate ICD10 codes
 toMatch <- c("I210", "I211", "I212", "I213", "I214", "I219", "I801", "I802", "I260", "I269") #ICD10 codes for acute MI, DVT and PE
 thrombotic_events_ICD10 <- unique(grep(paste(toMatch,collapse="|"), allICD10, value=TRUE))
 table(thrombotic_events_ICD10) #Check the codes of interest that were matched
-
-#load function
-source("UKBexpFunc.R")
 
 dat <- read.table("output_extracted_41270_ICD10_41280_ICD10dates.tsv", header = T)
 thrombotic_events_ICD10 <- read.table("thrombotic_events_ICD10") 
