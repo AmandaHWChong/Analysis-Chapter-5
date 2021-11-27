@@ -265,7 +265,6 @@ ICD10_res <- res %>% select("projectID", "geneticID", "f.30082.0.0", "f.30102.0.
 # 7. tidy up data
 
 library(tidyr); library(dplyr)
-rm(list=ls())
 
 df <- ICD10_res 
 rm(ICD10_res)
