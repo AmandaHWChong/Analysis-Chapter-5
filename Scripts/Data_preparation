@@ -247,13 +247,19 @@ allICD10<-allICD10[!is.na(allICD10)] # removes NA
 allICD10<-allICD10[!duplicated(allICD10)] # removes duplicate ICD10 codes
 
 #Subset for only ICD10 codes of interest 
-toMatch <- c("I210", "I211", "I212", "I213", "I214", "I219", "I801", "I802", "I260", "I269") #ICD10 codes for acute MI, DVT and PE
+toMatch <- c("I210", "I211", "I212", "I213", "I214", "I219") #ICD10 codes for acute MI, DVT and PE
+#OR
+toMatch <- c("I801", "I802") #ICD10 codes for acute MI, DVT and PE
+#OR
+toMatch <- c("I260", "I269") #ICD10 codes for acute MI, DVT and PE
 thrombotic_events_ICD10 <- unique(grep(paste(toMatch,collapse="|"), allICD10, value=TRUE))
 table(thrombotic_events_ICD10) #Check the codes of interest that were matched
 
 #Run function 
 res <- UKBexpFunc(dat= dat, exposureCode = thrombotic_events_ICD10, sitename = "thrombotic.events.ICD10", other=F, exp_col = "f.41270.")
-ICD10_res <- res %>% select("projectID", "ieu", "PLT_initial_SD", "PLT_dates_initial","MPV_initial_SD", "MPVdates_initial", starts_with("thrombotic.events.ICD10"))
+ICD10_res <- res %>% select("projectID", "ieu", "PLT_initial_SD", "PLT_dates_initial","MPV_initial_SD", "MPVdates_initial", starts_with("thrombotic.events.ICD10")) #To match PLT with ICD10 cases
+#OR
+ICD10_res <- res %>% select("projectID", "ieu", "MPV_initial_SD", "MPVdates_initial", starts_with("thrombotic.events.ICD10")) # To make MPV to ICD10 
 
 #Format results 
 # 1. split the ICD10 diagnoses: #ICD_code/date_of_diagnosis
@@ -261,7 +267,7 @@ ICD10_res <- res %>% select("projectID", "ieu", "PLT_initial_SD", "PLT_dates_ini
 # 3. generate incidence of ICD10 flag
 # 4. define controls
 # 5. define incident cases
-# 7. tidy up data
+# 6. tidy up data
 
 library(tidyr); library(dplyr)
 
@@ -299,7 +305,7 @@ df_split$controls <- ifelse(
 )
 table(df_split$controls)
 
-#Step 4 - Participants who have a ICD10 of interest code diagnosed after PLT initial measurement date
+#Step 5 - Participants who have a ICD10 of interest code diagnosed after PLT initial measurement date
 # define incident cases (2=cases)
 df_split$cases <- ifelse(df_split$PLTincident.flag ==1, 2, 0) # cases
 table(df_split$cases)
@@ -308,5 +314,9 @@ df_split$incident_thrombotic_events <- NA
 df_split$incident_thrombotic_events <- ifelse(df_split$controls==1, 1, ifelse(df_split$cases==2, 2, NA))
 table(df_split$incident_thrombotic_events)
 
-#Step 5 
-res_final <- df_split[,c("projectID", "ieu", "PLT_initial_SD", "PLT_dates_initial","MPV_initial_SD", "MPVdates_initial", "incident_thrombotic_events")]
+#Step 6 
+res_final <- df_split[,c("projectID", "ieu", "MPV_initial_SD", "MPVdates_initial", "incident_thrombotic_events")]
+write.table(res_final, "UKB_PLT_initial_SD_ICD10_outcome", sep = " ", col.names=T,row.names=F,quote=F)
+#OR
+res_final <- df_split[,c("projectID", "ieu", "MPV_initial_SD", "incident_thrombotic_events")]
+write.table(res_final, "UKB_MPV_initial_SD_ICD10_outcome", sep = " ", col.names=T,row.names=F,quote=F)
