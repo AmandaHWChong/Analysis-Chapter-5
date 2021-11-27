@@ -271,10 +271,30 @@ rm(ICD10_res)
 df <- as.data.frame(df) 
 
 #Perform step 1 
-df2 <-separate(df2, thrombotic.events.ICD101, into = c("bladder.ICD10.1", "thromobtic.events.ICD10.date.diagnosis.1", sep = "/")
-df3 <-separate(df3, thrombotic.events.ICD102, into = c("bladder.ICD10.2", "thromobtic.events.ICD10.date.diagnosis.2", sep = "/")
-df4 <-separate(df4, thrombotic.events.ICD103, into = c("bladder.ICD10.3", "thromobtic.events.ICD10.date.diagnosis.3", sep = "/")
+df2 <-separate(df2, thrombotic.events.ICD101, into = c("thrombotic.events.ICD10.1", "thromobtic.events.ICD10.date.diagnosis.1", sep = "/")
+df3 <-separate(df3, thrombotic.events.ICD102, into = c("thrombotic.events.ICD10.2", "thromobtic.events.ICD10.date.diagnosis.2", sep = "/")
+df4 <-separate(df4, thrombotic.events.ICD103, into = c("thrombotic.events.ICD10.3", "thromobtic.events.ICD10.date.diagnosis.3", sep = "/")
+df_split <- separate(df5, thrombotic.events.ICD105, intro = c("thrombotic.events.ICD10.5", "thromobtic.events.ICD10.date.diagnosis.5"), sep = "/")
 
+rm(list = c("df2", "df3", "df4"))
+str(df, list.len=ncol(df))
+str(df_split, list.len=ncol(df_split))
 
+#Perform step 2 
+df_split$PLTinitialdates <- as.Date(df_split$PLT_dates_initial)
+date <- <- grepl("date", names(df_split))
+df_split[,date] <-lapply(df_split[, date, drop=FALSE], as.Date)
 
+#Step 3
+df_split <- df_split %>% mutate(earliest_date = pmin(thromobtic.events.ICD10.date.diagnosis.1, na.rm =T))
+df_split$PLTincident.flag <- ifelse(df_split$earliest_date >= df_split$PLTinitialdates,1,0) 
+table(df_split$PLTincident.flag)
+
+#Step 4 - Define controls
+df_split$controls <- ifelse(
+
+#Step 5 - Participants who have a ICD10 of interest code diagnosed after PLT initial measurement date
+# define incident cases (2=cases)
+df_split$cases <- ifelse(df_split$PLTincident.flag ==1, 2, 0) # cases
+table(df_split$cases)
 
