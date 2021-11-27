@@ -309,4 +309,4 @@ df_split$incident_thrombotic_events <- ifelse(df_split$controls==1, 1, ifelse(df
 table(df_split$incident_thrombotic_events)
 
 #Step 5 
-res_final <- df_split[,c("projectID", "PLT_initial_SD", "PLT_dates_initial","MPV_initial_SD", "MPVdates_initial", "incident_thrombotic_events")]
+res_final <- df_split[,c("projectID", "ieu", "PLT_initial_SD", "PLT_dates_initial","MPV_initial_SD", "MPVdates_initial", "incident_thrombotic_events")]
