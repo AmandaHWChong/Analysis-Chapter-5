@@ -261,7 +261,6 @@ ICD10_res <- res %>% select("projectID", "ieu", "PLT_initial_SD", "PLT_dates_ini
 # 3. generate incidence of ICD10 flag
 # 4. define controls
 # 5. define incident cases
-# 6. define overall cases
 # 7. tidy up data
 
 library(tidyr); library(dplyr)
@@ -292,9 +291,22 @@ table(df_split$PLTincident.flag)
 
 #Step 4 - Define controls
 df_split$controls <- ifelse(
+  is.na(df_split$thrombotic.events.ICD10.1) &
+    is.na(df_split$thrombotic.events.ICD10.2) &
+    is.na(df_split$thrombotic.events.ICD10.3), 
+  1,
+  0
+)
+table(df_split$controls)
 
-#Step 5 - Participants who have a ICD10 of interest code diagnosed after PLT initial measurement date
+#Step 4 - Participants who have a ICD10 of interest code diagnosed after PLT initial measurement date
 # define incident cases (2=cases)
 df_split$cases <- ifelse(df_split$PLTincident.flag ==1, 2, 0) # cases
 table(df_split$cases)
+#Make incident thrombotic outcome
+df_split$incident_thrombotic_events <- NA
+df_split$incident_thrombotic_events <- ifelse(df_split$controls==1, 1, ifelse(df_split$cases==2, 2, NA))
+table(df_split$incident_thrombotic_events)
 
+#Step 5 
+res_final <- df_split[,c("projectID", "PLT_initial_SD", "PLT_dates_initial","MPV_initial_SD", "MPVdates_initial", "incident_thrombotic_events")]
