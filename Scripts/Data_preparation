@@ -3,8 +3,9 @@
 
 ##Prepare ICD10 codes of interest 
 #Read in relevant packages
-library(dplyr)
 library(data.table)
+library(plyr)
+library(dplyr)
 
 #Read in relevant data
 dat <- fread("output_extracted_41270_ICD10_41280_ICD10dates.tsv", header = T, sep = " ", na.strings = c("","NA"))
