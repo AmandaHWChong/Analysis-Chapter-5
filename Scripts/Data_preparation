@@ -247,11 +247,11 @@ allICD10<-allICD10[!is.na(allICD10)] # removes NA
 allICD10<-allICD10[!duplicated(allICD10)] # removes duplicate ICD10 codes
 
 #Subset for only ICD10 codes of interest 
-toMatch <- c("I210", "I211", "I212", "I213", "I214", "I219") #ICD10 codes for acute MI, DVT and PE
+toMatch <- c("I210", "I211", "I212", "I213", "I214", "I219") #ICD10 codes for acute MI
 #OR
-toMatch <- c("I801", "I802") #ICD10 codes for acute MI, DVT and PE
+toMatch <- c("I801", "I802") #ICD10 codes for DVT
 #OR
-toMatch <- c("I260", "I269") #ICD10 codes for acute MI, DVT and PE
+toMatch <- c("I260", "I269") #ICD10 codes for PE
 thrombotic_events_ICD10 <- unique(grep(paste(toMatch,collapse="|"), allICD10, value=TRUE))
 table(thrombotic_events_ICD10) #Check the codes of interest that were matched
 
