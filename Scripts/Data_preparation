@@ -257,9 +257,17 @@ table(thrombotic_events_ICD10) #Check the codes of interest that were matched
 
 #Run function 
 res <- UKBexpFunc(dat= dat, exposureCode = thrombotic_events_ICD10, sitename = "thrombotic.events.ICD10", other=F, exp_col = "f.41270.")
+res <- UKBexpFunc(dat= dat, exposureCode = thrombotic_events_ICD10, sitename = "otherICD10", other=TRUE)
+
 ICD10_res <- res %>% select("projectID", "ieu", "PLT_initial_SD", "PLT_dates_initial","MPV_initial_SD", "MPVdates_initial", starts_with("thrombotic.events.ICD10")) #To match PLT with ICD10 cases
 #OR
 ICD10_res <- res %>% select("projectID", "ieu", "MPV_initial_SD", "MPVdates_initial", starts_with("thrombotic.events.ICD10")) # To make MPV to ICD10 
+
+# How many diagnosis of ICD10 vars?
+ICD10_cases <- res %>% dplyr:: select(starts_with("thrombotic"))
+str(df, list.len=ncol(ICD10_cases)) 
+ICD10_other <- res %>% dplyr:: select(starts_with("other"))
+str(df, list.len=ncol(ICD10_other)) 
 
 #Format results 
 # 1. split the ICD10 diagnoses: #ICD_code/date_of_diagnosis
