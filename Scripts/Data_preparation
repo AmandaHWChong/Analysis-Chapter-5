@@ -315,8 +315,8 @@ df_split$incident_thrombotic_events <- ifelse(df_split$controls==1, 1, ifelse(df
 table(df_split$incident_thrombotic_events)
 
 #Step 6 
-res_final <- df_split[,c("projectID", "ieu", "MPV_initial_SD", "MPVdates_initial", "incident_thrombotic_events")]
+res_final <- df_split[,c("projectID", "ieu", "PLT_initial_SD", "PLT_dates_initial", "incident_thrombotic_events")]
 write.table(res_final, "UKB_PLT_initial_SD_ICD10_outcome", sep = " ", col.names=T,row.names=F,quote=F)
 #OR
-res_final <- df_split[,c("projectID", "ieu", "MPV_initial_SD", "incident_thrombotic_events")]
+res_final <- df_split[,c("projectID", "ieu", "MPV_initial_SD", "MPVdates_initial", "incident_thrombotic_events")]
 write.table(res_final, "UKB_MPV_initial_SD_ICD10_outcome", sep = " ", col.names=T,row.names=F,quote=F)
