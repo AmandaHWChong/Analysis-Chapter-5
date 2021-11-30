@@ -266,7 +266,7 @@ str(df, list.len=ncol(ICD10_cases))
 ICD10_other <- res %>% dplyr:: select(starts_with("other"))
 str(df, list.len=ncol(ICD10_other)) 
 
-ICD10_res <- res %>% select("projectID", "ieu", "PLT_initial_SD", "PLT_dates_initial","MPV_initial_SD", "MPVdates_initial", starts_with("thrombotic.events.ICD10"), starts_with("other")) #To match PLT with ICD10 cases
+ICD10_res <- res %>% select("projectID", "ieu", "PLT_initial_SD", "PLT_dates_initial", starts_with("thrombotic.events.ICD10"), starts_with("other")) #To match PLT with ICD10 cases
 #OR
 ICD10_res <- res %>% select("projectID", "ieu", "MPV_initial_SD", "MPVdates_initial", starts_with("thrombotic.events.ICD10"), starts_with("other")) # To make MPV to ICD10 
 
@@ -717,6 +717,9 @@ str(df_split, list.len=ncol(df_split))
 
 #Perform step 2 
 df_split$PLTinitialdates <- as.Date(df_split$PLT_dates_initial)
+#OR
+df_split$MPVinitialdates <- as.Date(df_split$MPVdates_initial)
+
 date <- grepl("date", names(df_split))
 df_split[,date] <-lapply(df_split[, date, drop=FALSE], as.Date)
 
