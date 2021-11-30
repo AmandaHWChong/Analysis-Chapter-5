@@ -266,9 +266,9 @@ str(df, list.len=ncol(ICD10_cases))
 ICD10_other <- res %>% dplyr:: select(starts_with("other"))
 str(df, list.len=ncol(ICD10_other)) 
 
-ICD10_res <- res %>% select("projectID", "ieu", "PLT_initial_SD", "PLT_dates_initial", starts_with("thrombotic.events.ICD10"), starts_with("other")) #To match PLT with ICD10 cases
+ICD10_res_plt <- res %>% select("projectID", "ieu", "PLT_initial_SD", "PLT_dates_initial", starts_with("thrombotic.events.ICD10"), starts_with("other")) #To match PLT with ICD10 cases
 #OR
-ICD10_res <- res %>% select("projectID", "ieu", "MPV_initial_SD", "MPVdates_initial", starts_with("thrombotic.events.ICD10"), starts_with("other")) # To make MPV to ICD10 
+ICD10_res_mpv <- res %>% select("projectID", "ieu", "MPV_initial_SD", "MPVdates_initial", starts_with("thrombotic.events.ICD10"), starts_with("other")) # To make MPV to ICD10 
 
 #Format results 
 # 1. split the ICD10 diagnoses: #ICD_code/date_of_diagnosis
@@ -280,8 +280,11 @@ ICD10_res <- res %>% select("projectID", "ieu", "MPV_initial_SD", "MPVdates_init
 
 library(tidyr); library(dplyr)
 
-df <- ICD10_res 
-rm(ICD10_res)
+df <- ICD10_res_plt 
+rm(ICD10_res_plt)
+#OR
+df <- ICD10_res_mpv 
+rm(ICD10_res_mpv)
 df <- as.data.frame(df) 
 
 #Perform step 1 
