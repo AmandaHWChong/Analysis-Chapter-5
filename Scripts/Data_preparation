@@ -288,6 +288,31 @@ df <- as.data.frame(df)
 df2 <-separate(df, thrombotic.events.ICD101, into = c("thrombotic.events.ICD10.1", "thromobtic.events.ICD10.date.diagnosis.1"), sep = "/")
 df3 <-separate(df2, thrombotic.events.ICD102, into = c("thrombotic.events.ICD10.2", "thromobtic.events.ICD10.date.diagnosis.2"), sep = "/")
 df4 <-separate(df3, thrombotic.events.ICD103, into = c("thrombotic.events.ICD10.3", "thromobtic.events.ICD10.date.diagnosis.3"), sep = "/")
+df5 <-separate(df4, thrombotic.events.ICD104, into = c("thrombotic.events.ICD10.4", "thromobtic.events.ICD10.date.diagnosis.4"), sep = "/")
+df6 <-separate(df5, thrombotic.events.ICD105, into = c("thrombotic.events.ICD10.5", "thromobtic.events.ICD10.date.diagnosis.5"), sep = "/")
+df7 <-separate(df6, thrombotic.events.ICD106, into = c("thrombotic.events.ICD10.6", "thromobtic.events.ICD10.date.diagnosis.6"), sep = "/")
+df8 <-separate(df7, thrombotic.events.ICD107, into = c("thrombotic.events.ICD10.7", "thromobtic.events.ICD10.date.diagnosis.7"), sep = "/")
+df9 <-separate(df8, thrombotic.events.ICD108, into = c("thrombotic.events.ICD10.8", "thromobtic.events.ICD10.date.diagnosis.8"), sep = "/")
+df10 <-separate(df9, thrombotic.events.ICD109, into = c("thrombotic.events.ICD10.9", "thromobtic.events.ICD10.date.diagnosis.9"), sep = "/")
+df11 <-separate(df10, thrombotic.events.ICD1010, into = c("thrombotic.events.ICD10.10", "thromobtic.events.ICD10.date.diagnosis.10"), sep = "/")
+df12 <-separate(df11, thrombotic.events.ICD1010, into = c("thrombotic.events.ICD10.11", "thromobtic.events.ICD10.date.diagnosis.11"), sep = "/")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 df_split <- separate(df4, thrombotic.events.ICD105, into = c("thrombotic.events.ICD10.5", "thromobtic.events.ICD10.date.diagnosis.5"), sep = "/")
 
 rm(list = c("df2", "df3", "df4"))
