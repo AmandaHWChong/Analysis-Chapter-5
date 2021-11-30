@@ -710,10 +710,7 @@ df423<-separate(df422,otherICD10209,into=c("other.ICD10.209","other.ICD10.date.d
 df424<-separate(df423,otherICD10210,into=c("other.ICD10.210","other.ICD10.date.diagnosis.210"),sep="/")
 df425<-separate(df424,otherICD10211,into=c("other.ICD10.211","other.ICD10.date.diagnosis.211"),sep="/")
 df426<-separate(df425,otherICD10212,into=c("other.ICD10.212","other.ICD10.date.diagnosis.212"),sep="/")
-df427<-separate(df426,otherICD10213,into=c("other.ICD10.213","other.ICD10.date.diagnosis.213"),sep="/")
-
-
-df_split <- separate(df427, other1224, into=c("other.ICD10.214", "other.ICD10.date.diagnosis.214", sep="/")
+df_split<-separate(df426,otherICD10213,into=c("other.ICD10.213","other.ICD10.date.diagnosis.213"),sep="/")
 
 str(df, list.len=ncol(df))
 str(df_split, list.len=ncol(df_split))
