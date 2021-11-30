@@ -743,7 +743,7 @@ df_split$cases <- ifelse(df_split$MPVincident.flag ==1, 2, 0) # cases
 table(df_split$cases)
 #Make incident thrombotic outcome
 df_split$incident_thrombotic_events <- NA
-df_split$incident_thrombotic_events <- ifelse(df_split$cases==1, 1, NA)
+df_split$incident_thrombotic_events <- ifelse(df_split$cases==2, 2, NA)
 table(df_split$incident_thrombotic_events)
 
 #Step 5 
