@@ -256,8 +256,9 @@ thrombotic_events_ICD10 <- unique(grep(paste(toMatch,collapse="|"), allICD10, va
 table(thrombotic_events_ICD10) #Check the codes of interest that were matched
 
 #Run function 
-res <- UKBexpFunc(dat= dat, exposureCode = thrombotic_events_ICD10, sitename = "thrombotic.events.ICD10", other=F, exp_col = "f.41270.")
-res <- UKBexpFunc(dat= dat, exposureCode = thrombotic_events_ICD10, sitename = "otherICD10", other=TRUE)
+res_ICD10cases <- UKBexpFunc(dat= dat, exposureCode = thrombotic_events_ICD10, sitename = "thrombotic.events.ICD10", other=F, exp_col = "f.41270.")
+res_ICD10controls <- UKBexpFunc(dat= dat, exposureCode = thrombotic_events_ICD10, sitename = "otherICD10", other=TRUE)
+res <- full_join(res_ICD10cases, res_ICD10controls)
 
 ICD10_res <- res %>% select("projectID", "ieu", "PLT_initial_SD", "PLT_dates_initial","MPV_initial_SD", "MPVdates_initial", starts_with("thrombotic.events.ICD10")) #To match PLT with ICD10 cases
 #OR
