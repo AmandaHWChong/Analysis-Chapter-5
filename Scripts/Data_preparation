@@ -724,7 +724,7 @@ date <- grepl("date", names(df_split))
 df_split[,date] <-lapply(df_split[, date, drop=FALSE], as.Date)
 
 #Step 3
-df_split <- df_split %>% mutate(earliest_date = pmin(thromobtic.events.ICD10.date.diagnosis.1, na.rm =T))
+df_split <- df_split %>% mutate(earliest_date = pmin(thrombotic.events.ICD10.date.diagnosis.1, na.rm =T))
 df_split$PLTincident.flag <- ifelse(df_split$earliest_date >= df_split$PLTinitialdates,1,0) 
 table(df_split$PLTincident.flag)
 
