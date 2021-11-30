@@ -729,9 +729,11 @@ df_split[,date] <-lapply(df_split[, date, drop=FALSE], as.Date)
 #Step 3
 df_split <- df_split %>% mutate(earliest_date = pmin(thrombotic.events.ICD10.date.diagnosis.1, na.rm =T))
 df_split$PLTincident.flag <- ifelse(df_split$earliest_date >= df_split$PLTinitialdates,1,0) 
+table(df_split$PLTincident.flag)
+
 #OR
 df_split$MPVincident.flag <- ifelse(df_split$earliest_date >= df_split$MPVinitialdates,1,0) 
-table(df_split$PLTincident.flag)
+table(df_split$MPVincident.flag)
 
 #Step 4 - Participants who have a ICD10 of interest code diagnosed after PLT initial measurement date
 # define incident cases (2=cases)
