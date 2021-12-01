@@ -37,8 +37,8 @@ t.plt.dvt.prs <- inner_join(t.plt.dvt, t.plt.prs.sd, by = c("FID", "IID"))
 t.plt.pe.prs <- inner_join(t.plt.pe, t.plt.prs.sd, by = c("FID", "IID")) 
 t.mpv.acuteMI.prs <- inner_join(t.mpv.acuteMI, t.mpv.prs.sd, by = c("FID", "IID")) 
 t.mpv.mortalityMI.prs <- inner_join(t.mpv.mortalityMI, t.mpv.prs.sd, by = c("FID", "IID")) 
-t.mpv.dvt.prs <- inner_join(t.mpv.dvt.prs, t.mpv.prs.sd, by = c("FID", "IID")) 
-t.mpv.pe.prs <- inner_join(t.mpv.pe.prs, t.mpv.prs.sd, by = c("FID", "IID")) 
+t.mpv.dvt.prs <- inner_join(t.mpv.dvt, t.mpv.prs.sd, by = c("FID", "IID")) 
+t.mpv.pe.prs <- inner_join(t.mpv.pe, t.mpv.prs.sd, by = c("FID", "IID")) 
 
 #Remove NAs from each subsetted dataframe
 t.plt.acuteMI.prs <- na.omit(t.plt.acuteMI)
