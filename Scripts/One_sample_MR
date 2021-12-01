@@ -41,14 +41,14 @@ t.mpv.dvt.prs <- inner_join(t.mpv.dvt, t.mpv.prs.sd, by = c("FID", "IID"))
 t.mpv.pe.prs <- inner_join(t.mpv.pe, t.mpv.prs.sd, by = c("FID", "IID")) 
 
 #Remove NAs from each subsetted dataframe
-t.plt.acuteMI.prs <- na.omit(t.plt.acuteMI)
-t.plt.mortalityMI.prs <- na.omit(t.plt.mortalityMI)
-t.plt.dvt.prs <- na.omit(t.plt.dvt)
-t.plt.pe.prs <- na.omit(t.plt.pe)
-t.mpv.acuteMI.prs <- na.omit(t.mpv.acuteMI)
-t.mpv.mortalityMI.prs <- na.omit(t.mpv.mortalityMI)
-t.mpv.dvt.prs <- na.omit(t.mpv.dvt)
-t.mpv.pe.prs <- na.omit(t.mpv.pe)
+t.plt.acuteMI.prs <- na.omit(t.plt.acuteMI.prs)
+t.plt.mortalityMI.prs <- na.omit(t.plt.mortalityMI.prs)
+t.plt.dvt.prs <- na.omit(t.plt.dvt.prs)
+t.plt.pe.prs <- na.omit(t.plt.pe.prs)
+t.mpv.acuteMI.prs <- na.omit(t.mpv.acuteMI.prs)
+t.mpv.mortalityMI.prs <- na.omit(t.mpv.mortalityMI.prs)
+t.mpv.dvt.prs <- na.omit(t.mpv.dvt.prs)
+t.mpv.pe.prs <- na.omit(t.mpv.pe.prs)
 
 #2SLS analyses - Binary outcome - UK Biobank Overall
 #In a two-stage analysis using a binary outcome (case-control setting) requires use of logistic regression with the inference on the controls only (where Y = 0). This can be performed by sequential regression using the 'predict' function 
