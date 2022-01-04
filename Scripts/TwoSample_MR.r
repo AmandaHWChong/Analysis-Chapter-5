@@ -38,8 +38,8 @@ outcome_dat <- extract_outcome_data(snps = exposure$SNP, outcomes = id.cvd.out)
 
 #OR 
 
-#Read in CVD outcome of interest 
-outcome_dat <- read_outcome_data(snps = exposure$SNP, filename = "ukb-d-I9_VTE_input", sep = " ", snp_col = "SNP", beta_col = "beta_logOR", se_col = "se_logOR", pval_col = "pval", eaf_col = "eaf", effect_allele_col = "effect_allele", other_allele_col = "other_allele")
+#Read in FinnGen CVD outcome of interest 
+outcome_dat <- read_outcome_data(snps = exposure$SNP, filename = "/mnt/storage/scratch/ac14629/TwoSample_MR/Platelet_cardiovascular_outcomes/FinnGen_GWAS/finngen_R5_I9_MI", sep = "\t", snp_col = "rsids", beta_col = "beta", se_col = "sebeta", pval_col = "pval", effect_allele_col = "effect_allele", other_allele_col = "other_allele")
 
 #Harmonise exposure and outcome data 
 dat <- harmonise_data(exposure_dat = exposure, outcome_dat = outcome_dat)
