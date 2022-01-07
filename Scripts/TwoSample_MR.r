@@ -25,8 +25,11 @@ exposure <- format_data(data, type ="exposure", header = TRUE, snp_col = "SNP", 
 #OR 
 
 #Read in platelet GWAS data 
-data <- read.table("/mnt/storage/scratch/ac14629/TwoSample_MR/Platelet_cardiovascular_outcomes/ukb-d-30080_irnt_PLT", header = T)
-exposure <- format_data(data, type ="exposure", header = TRUE, snp_col = "SNP", chr_col = "CHROM", pos_col = "POS", beta_col = "Beta", se_col = "SE", eaf_col = "EAF", pval_col = "Pval", samplesize_col = "N", effect_allele_col = "ALT", other_allele_col = "REF")
+PLT_data <- read.table("/mnt/storage/scratch/ac14629/TwoSample_MR/Platelet_cardiovascular_outcomes/ukb-d-30080_irnt_PLT", header = T)
+exposure <- format_data(PLT_data, type ="exposure", header = TRUE, snp_col = "SNP", chr_col = "CHROM", pos_col = "POS", beta_col = "Beta", se_col = "SE", eaf_col = "EAF", pval_col = "Pval", samplesize_col = "N", effect_allele_col = "ALT", other_allele_col = "REF")
+
+MPV_data <- read.table("/mnt/storage/scratch/ac14629/TwoSample_MR/Platelet_cardiovascular_outcomes/ukb-d-30100_irnt_MPV", header = T)
+exposure <- format_data(MPV_data, type ="exposure", header = TRUE, snp_col = "SNP", chr_col = "CHROM", pos_col = "POS", beta_col = "Beta", se_col = "SE", eaf_col = "EAF", pval_col = "Pval", samplesize_col = "N", effect_allele_col = "ALT", other_allele_col = "REF")
 
 #LD clumping 
 try(exposure <- clump_data(exposure)) 
