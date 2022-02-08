@@ -20,7 +20,7 @@ exposure <- extract_instruments(id.platelet.exp)
 
 #Read in exposure data (e.g. RALA and RALB)
 data <- read.table("RALA_eqtl_instruments_FINAL", header = T)
-exposure <- format_data(data, type ="exposure", header = TRUE, snp_col = "SNP", gene_col = "Gene", chr_col = "Chr", pos_col = "Pos", effect_allele_col = "EA", other_allele_col = "OA", pval_col = "P", samplesize_col = "N", eaf_col = "EAF", beta_col = "Beta", se_col = "SE")
+exposure <- format_data(data, type ="exposure", header = TRUE, snp_col = "SNP", gene_col = "Gene", chr_col = "Chr", pos_col = "Pos", effect_allele_col = "EA", other_allele_col = "OA", pval_col = "Pvalue", samplesize_col = "N", eaf_col = "EAF", beta_col = "Beta", se_col = "SE")
 
 #OR 
 
