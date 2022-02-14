@@ -10,6 +10,7 @@ install.packages("ggplot2")
 
 #Load packages
 library(TwoSampleMR)
+library(MRPRESSO)
 
 #Extract platelet exposures 
 ao<-available_outcomes()
