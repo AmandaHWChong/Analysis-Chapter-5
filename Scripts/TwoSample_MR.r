@@ -60,6 +60,10 @@ or_results_res <- generate_odds_ratios(Res) #Odds ratio
 Res_MR_PRESSO <- run_mr_presso(dat) #Run if there is evidence of heterogeneity in Res_hetero findings 
 Res_mr_leaveoneout <- mr_leaveoneout(dat, parameters = default_parameters(), method = mr_ivw)
 
+#MR-PRESSO
+Res_MR_PRESSO <- mr_presso(BetaOutcome = "beta.outcome", BetaExposure = "beta.exposure", SdOutcome = "se.outcome", SdExposure = "se.exposure", OUTLIERtest = TRUE, DISTORTIONtest = TRUE, data = dat, NbDistribution = 1000,  SignifThreshold = 0.05)
+
+
 #Plot MR-leave one out 
 png("MR_leaveoneout_exposure_outcome.png", width = 4, height = 4, units = 'in', res = 300)
 mr_leaveoneout_plot(Res_mr_leaveoneout)
