@@ -9,7 +9,7 @@ data <- read.table("/projects/MRC-IEU/research/projects/ieu1/wp1/028/working/dat
 #Subset each exposures of interest with each outcome of interest, plus covariates and PC
 t.plt.acuteMI <- data[c("FID", "IID", "PLT_initial_SD", "Acute_MI", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment")]
 
-t.plt.mortalityMI <- data[c("FID", "IID", "PLT_initial_SD", "Mortality_MI", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment")]
+t.plt.mortalityMI <- data[c("FID", "IID", "PLT_initial_SD", "allcausemortality_afterMI", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment")]
 
 t.plt.dvt <- data[c("FID", "IID", "PLT_initial_SD", "DVT", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment")]
 
@@ -17,7 +17,7 @@ t.plt.pe <- data[c("FID", "IID", "PLT_initial_SD", "PE", "alcintakefreq_initiala
 
 t.mpv.acuteMI <- data[c("FID", "IID", "MPV_initial_SD", "Acute_MI", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment")]
 
-t.mpv.mortalityMI <- data[c("FID", "IID", "MPV_initial_SD", "Mortality_MI", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment")]
+t.mpv.mortalityMI <- data[c("FID", "IID", "MPV_initial_SD", "allcausemortality_afterMI", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment")]
 
 t.mpv.dvt <- data[c("FID", "IID", "MPV_initial_SD", "DVT", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment")]
 
@@ -42,7 +42,7 @@ summary(obs.model.acuteMI.plt)$coef[2] # observational estimate
 summary(obs.model.acuteMI.plt)$coef[2,2] # Standard error of observational estimate 
 
 #Mortality after MI on platelet count 
-obs.model.mortalityMI.plt <- glm(Mortality_MI ~ PLT_initial_SD + alcintakefreq_initialassessment + eversmoked_initialassessment + BMI_initialassessment + HDL_initialassessment + LDL_initialassessment + triglycerides_initialassessment + sex + age_initialrecruitment, data = t.plt.mortalityMI, family = "binomial")
+obs.model.mortalityMI.plt <- glm(allcausemortality_afterMI ~ PLT_initial_SD + alcintakefreq_initialassessment + eversmoked_initialassessment + BMI_initialassessment + HDL_initialassessment + LDL_initialassessment + triglycerides_initialassessment + sex + age_initialrecruitment, data = t.plt.mortalityMI, family = "binomial")
 
 summary(obs.model.mortalityMI.plt)
 summary(obs.model.mortalityMI.plt)$coef[2] # observational estimate 
@@ -70,7 +70,7 @@ summary(obs.model.acuteMI.mpv)$coef[2] # observational estimate
 summary(obs.model.acuteMI.mpv)$coef[2,2] # Standard error of observational estimate
 
 #Mortality after MI on mean platelet volume 
-obs.model.mortalityMI.mpv <- glm(Mortality_MI ~ MPV_initial_SD + alcintakefreq_initialassessment + eversmoked_initialassessment + BMI_initialassessment + HDL_initialassessment + LDL_initialassessment + triglycerides_initialassessment + sex + age_initialrecruitment, data = t.mpv.mortalityMI, family = "binomial")
+obs.model.mortalityMI.mpv <- glm(allcausemortality_afterMI ~ MPV_initial_SD + alcintakefreq_initialassessment + eversmoked_initialassessment + BMI_initialassessment + HDL_initialassessment + LDL_initialassessment + triglycerides_initialassessment + sex + age_initialrecruitment, data = t.mpv.mortalityMI, family = "binomial")
 
 summary(obs.model.mortalityMI.mpv)
 summary(obs.model.mortalityMI.mpv)$coef[2] # observational estimate 
