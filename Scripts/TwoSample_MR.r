@@ -42,12 +42,19 @@ outcome_dat <- extract_outcome_data(snps = exposure$SNP, outcomes = id.cvd.out)
 
 #OR 
 
-#Read in FinnGen CVD outcome of interest 
-outcome_dat <- read_outcome_data(snps = exposure$SNP, filename = "/mnt/storage/scratch/ac14629/TwoSample_MR/Platelet_cardiovascular_outcomes/FinnGen_GWAS/finngen_R5_I9_MI", sep = "\t", snp_col = "rsids", beta_col = "beta", se_col = "sebeta", pval_col = "pval", effect_allele_col = "alt", other_allele_col = "ref") #Myocardial infarction GWAS 
+#Read in unadjusted and adjusted outcome data
 
-outcome_dat <- read_outcome_data(snps = exposure$SNP, filename = "/mnt/storage/scratch/ac14629/TwoSample_MR/Platelet_cardiovascular_outcomes/FinnGen_GWAS/finngen_R5_I9_PHLETHROMBDVTLOW", sep = "\t", snp_col = "rsids", beta_col = "beta", se_col = "sebeta", pval_col = "pval", effect_allele_col = "alt", other_allele_col = "ref") #DVT GWAS 
+#Unadjusted 
+outcome_dat <- read_outcome_data(snps = exposure$SNP, filename = "Mortality_EA_jointgender_25Feb2021_1_processed.csv", sep = " ", snp_col = "SNP", effect_allele_col = "Allele1", other_allele_col = "Allele2", eaf_col = "Freq1", se_col = "StdErr", pval_col = "PVALUE", beta_col = "Effect")
 
-outcome_dat <- read_outcome_data(snps = exposure$SNP, filename = "/mnt/storage/scratch/ac14629/TwoSample_MR/Platelet_cardiovascular_outcomes/FinnGen_GWAS/finngen_R5_I9_PULMEMB", sep = "\t", snp_col = "rsids", beta_col = "beta", se_col = "sebeta", pval_col = "pval", effect_allele_col = "alt", other_allele_col = "ref") #PE GWAS 
+#Dudbridge et al approach adjusted 
+outcome_dat <- read_outcome_data(snps = exposure$SNP, filename = "Mortality_EA_jointgender_25Feb2021_Dudbridgecorrected.txt", sep = " ", snp_col = "SNP", beta_col = "beta.corrected", se_col = "se.corrected", pval_col = "pval.corrected", effect_allele_col = "EA.prognosis", other_allele_col = "OA.prognosis", eaf_col = "EAF.prognosis")
+
+#SH 0.08 adjustment factor 
+outcome_dat <- read_outcome_data(snps = exposure$SNP, filename = "Mortality_EA_jointgender_25Feb2021_SHcorrected_0.08adjustmentfac_xp_thresh_0.001.txt", snp_col = "SNP", beta_col = "beta.corrected", se_col = "se.corrected", pval_col = "pval.corrected", effect_allele_col = "EA.prognosis", other_allele_col = "OA.prognosis", eaf_col = "EAF.prognosis")
+
+#SH 0.59 adjustment factor
+outcome_dat <- read_outcome_data(snps = exposure$SNP, filename = "Mortality_EA_jointgender_25Feb2021_SHcorrected_0.59adjustmentfac_xp_thresh_0.1.txt", snp_col = "SNP", beta_col = "beta.corrected", se_col = "se.corrected", pval_col = "pval.corrected", effect_allele_col = "EA.prognosis", other_allele_col = "OA.prognosis", eaf_col = "EAF.prognosis")
 
 #Harmonise exposure and outcome data 
 dat <- harmonise_data(exposure_dat = exposure, outcome_dat = outcome_dat)
