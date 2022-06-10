@@ -65,6 +65,7 @@ Res_pleio <- mr_pleiotropy_test(dat) # MR-Egger intercept test
 Res_hetero <- mr_heterogeneity(dat) #
 Res_single <- mr_singlesnp(dat) #single SNP analysis
 or_results_res <- generate_odds_ratios(Res) #Odds ratio 
+Res_rucker_jackknife <- (dat, parameters = default_parameters())
 Res_MR_PRESSO <- run_mr_presso(dat) #Run if there is evidence of heterogeneity in Res_hetero findings 
 Res_mr_leaveoneout <- mr_leaveoneout(dat, parameters = default_parameters(), method = mr_ivw)
 
@@ -83,6 +84,7 @@ write.table(Res_pleio,"MR_pleio_exposure_outcome",sep="\t",col.names=T,row.names
 write.table(Res_hetero,"MR_hetero_exposure_outcome",sep="\t",col.names=T,row.names=F,quote=F)
 write.table(Res_single,"MR_single_exposure_outcome",sep="\t",col.names=T,row.names=F,quote=F)
 write.table(or_results_res,"MR_OR_exposure_outcome",sep="\t",col.names=T,row.names=F,quote=F)
+write.table(Res_rucker_jackknife, "MR_rucker_jackknife_exposure_outcome", sep="\t",col.names=T,row.names=F,quote=F)
 write.table(Res_MR_PRESSO, "MR_PRESSO_exposure_outcome",sep="\t",col.names=T,row.names=F,quote=F) 
 write.table(Res_mr_leaveoneout, "Res_mr_leaveoneout_exposure_outcome", sep="\t",col.names=T,row.names=F,quote=F) 
 
