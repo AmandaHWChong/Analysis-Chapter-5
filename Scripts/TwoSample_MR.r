@@ -65,7 +65,7 @@ Res_pleio <- mr_pleiotropy_test(dat) # MR-Egger intercept test
 Res_hetero <- mr_heterogeneity(dat) #
 Res_single <- mr_singlesnp(dat) #single SNP analysis
 or_results_res <- generate_odds_ratios(Res) #Odds ratio 
-Res_rucker_jackknife <- (dat, parameters = default_parameters())
+Res_rucker_jackknife <- mr_rucker_jackknife(dat, parameters = default_parameters())
 Res_MR_PRESSO <- run_mr_presso(dat) #Run if there is evidence of heterogeneity in Res_hetero findings 
 Res_mr_leaveoneout <- mr_leaveoneout(dat, parameters = default_parameters(), method = mr_ivw)
 
