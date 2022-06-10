@@ -60,11 +60,10 @@ outcome_dat <- read_outcome_data(snps = exposure$SNP, filename = "Mortality_EA_j
 dat <- harmonise_data(exposure_dat = exposure, outcome_dat = outcome_dat)
 
 #MR analysis 
-res <- mr(dat) #IVW (default), Egger, WM, MODE, Wald ratio 
-plt <- mr_pleiotropy_test(dat) # MR-Egger intercept test 
-het <- mr_heterogeneity(dat) #
-sin <- mr_singlesnp(dat) #single SNP analysis
-com_res <- combine_all_mrresults(res, het, plt, sin, ao_slc = T, Exp = F, split.exposure = T, split.outcome = T)
+Res <- mr(dat) #IVW (default), Egger, WM, MODE, Wald ratio 
+Res_pleio <- mr_pleiotropy_test(dat) # MR-Egger intercept test 
+Res_hetero <- mr_heterogeneity(dat) #
+Res_single <- mr_singlesnp(dat) #single SNP analysis
 or_results_res <- generate_odds_ratios(Res) #Odds ratio 
 Res_MR_PRESSO <- run_mr_presso(dat) #Run if there is evidence of heterogeneity in Res_hetero findings 
 Res_mr_leaveoneout <- mr_leaveoneout(dat, parameters = default_parameters(), method = mr_ivw)
