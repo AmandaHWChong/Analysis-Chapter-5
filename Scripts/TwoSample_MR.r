@@ -147,5 +147,5 @@ mod.sim2 <- simex(Fit2,B=1000, measurement.error = seBetaXG, SIMEXvariable="BXG"
 mod1<-summary(mod.sim1)
 mod2<-summary(mod.sim2)
 
-write.table(mod1, "SIMEX_correction_exposure_outcome_model_1", sep ="\t",col.names=T,row.names=F,quote=F) 
-write.table(mod2, "SIMEX_correction_exposure_outcome_model_2", sep ="\t",col.names=T,row.names=F,quote=F) 
+write.table(mod1, "SIMEX_correction_weighted_exposure_outcome", sep ="\t",col.names=T,row.names=F,quote=F) 
+write.table(mod2, "SIMEX_correction_unweighted_exposure_outcome", sep ="\t",col.names=T,row.names=F,quote=F) 
