@@ -196,3 +196,95 @@ ivmodel.MPV.PE <- glm(PE ~ predict(lm(MPV_initial_SD[PE==0]~g0), newdata=list(g0
 summary(ivmodel.MPV.PE)
 summary(ivmodel.MPV.PE)$coef[2] # 2SLS estimate 
 summary(ivmodel.MPV.PE)$coef[2,2] # Standard error of 2SLS estimate
+
+#Statin on platelet count 
+g = t.plt.statin.prs$PLT_PRS_SD
+
+g_resid <- lm(g ~ age_initialrecruitment + sex + PC1 + PC2 +PC3 + PC4 + PC5 + PC6 + PC7 + PC8 + PC9 + PC10 + PC11 + PC12 + PC13 + PC14 + PC15 + PC16 + PC17 + PC18 + PC19 + PC20 + PC21 + PC22 + PC23 + PC24 + PC25 + PC26 + PC27 + PC28 + PC29 + PC30 + PC31 + PC32 + PC33 + PC34 + PC35 + PC36 + PC37 + PC38 + PC39 + PC40, data = t.plt.statin.prs)
+
+g_resid <- resid(g_resid)
+
+g0=g_resid[t.plt.statin.prs$statin_use==0]
+
+ivmodel.PLT.statin <- glm(statin_use ~ predict(lm(PLT_initial_SD[statin_use==0]~g0), newdata=list(g0=g))+ age_initialrecruitment + sex + PC1 + PC2 +PC3 + PC4 + PC5 + PC6 + PC7 + PC8 + PC9 + PC10 + PC11 + PC12 + PC13 + PC14 + PC15 + PC16 + PC17 + PC18 + PC19 + PC20 + PC21 + PC22 + PC23 + PC24 + PC25 + PC26 + PC27 + PC28 + PC29 + PC30 + PC31 + PC32 + PC33 + PC34 + PC35 + PC36 + PC37 + PC38 + PC39 + PC40, data = t.plt.statin.prs, family = "binomial") 
+
+summary(ivmodel.PLT.statin)
+summary(ivmodel.PLT.statin)$coef[2] # 2SLS estimate 
+summary(ivmodel.PLT.statin)$coef[2,2] # Standard error of 2SLS estimate 
+
+#Clopidogrel on platelet count 
+g = t.plt.clopidogrel.prs$PLT_PRS_SD
+
+g_resid <- lm(g ~ age_initialrecruitment + sex + PC1 + PC2 +PC3 + PC4 + PC5 + PC6 + PC7 + PC8 + PC9 + PC10 + PC11 + PC12 + PC13 + PC14 + PC15 + PC16 + PC17 + PC18 + PC19 + PC20 + PC21 + PC22 + PC23 + PC24 + PC25 + PC26 + PC27 + PC28 + PC29 + PC30 + PC31 + PC32 + PC33 + PC34 + PC35 + PC36 + PC37 + PC38 + PC39 + PC40, data = t.plt.clopidogrel.prs)
+
+g_resid <- resid(g_resid)
+
+g0=g_resid[t.plt.clopidogrel.prs$clopidogrel_use==0]
+
+ivmodel.PLT.clopidogrel <- glm(clopidogrel_use ~ predict(lm(PLT_initial_SD[clopidogrel_use==0]~g0), newdata=list(g0=g))+ age_initialrecruitment + sex + PC1 + PC2 +PC3 + PC4 + PC5 + PC6 + PC7 + PC8 + PC9 + PC10 + PC11 + PC12 + PC13 + PC14 + PC15 + PC16 + PC17 + PC18 + PC19 + PC20 + PC21 + PC22 + PC23 + PC24 + PC25 + PC26 + PC27 + PC28 + PC29 + PC30 + PC31 + PC32 + PC33 + PC34 + PC35 + PC36 + PC37 + PC38 + PC39 + PC40, data = t.plt.clopidogrel.prs, family = "binomial") 
+
+summary(ivmodel.PLT.clopidogrel)
+summary(ivmodel.PLT.clopiodgrel)$coef[2] # 2SLS estimate 
+summary(ivmodel.PLT.clopidogrel)$coef[2,2] # Standard error of 2SLS estimate
+
+#Statin and clopidogrel use on platelet count 
+g = t.plt.statin.clopidogrel.prs$PLT_PRS_SD
+
+g_resid <- lm(g ~ age_initialrecruitment + sex + PC1 + PC2 +PC3 + PC4 + PC5 + PC6 + PC7 + PC8 + PC9 + PC10 + PC11 + PC12 + PC13 + PC14 + PC15 + PC16 + PC17 + PC18 + PC19 + PC20 + PC21 + PC22 + PC23 + PC24 + PC25 + PC26 + PC27 + PC28 + PC29 + PC30 + PC31 + PC32 + PC33 + PC34 + PC35 + PC36 + PC37 + PC38 + PC39 + PC40, data = t.plt.statin.clopidogrel.prs)
+
+g_resid <- resid(g_resid)
+
+g0=g_resid[t.plt.statin.clopidogrel.prs$statin_clopidogrel_use==0]
+
+ivmodel.PLT.statin.clopidogrel <- glm(statin_clopidogrel_use ~ predict(lm(PLT_initial_SD[statin_clopidogrel_use==0]~g0), newdata=list(g0=g))+ age_initialrecruitment + sex + PC1 + PC2 +PC3 + PC4 + PC5 + PC6 + PC7 + PC8 + PC9 + PC10 + PC11 + PC12 + PC13 + PC14 + PC15 + PC16 + PC17 + PC18 + PC19 + PC20 + PC21 + PC22 + PC23 + PC24 + PC25 + PC26 + PC27 + PC28 + PC29 + PC30 + PC31 + PC32 + PC33 + PC34 + PC35 + PC36 + PC37 + PC38 + PC39 + PC40, data = t.plt.statin.clopidogrel.prs, family = "binomial") 
+
+summary(ivmodel.PLT.statin.clopidogrel)
+summary(ivmodel.PLT.statin.clopiodgrel)$coef[2] # 2SLS estimate 
+summary(ivmodel.PLT.statin.clopidogrel)$coef[2,2] # Standard error of 2SLS estimate
+
+#Statin on mean platelet volume 
+g = t.mpv.statin.prs$MPV_PRS_SD
+
+g_resid <- lm(g ~ age_initialrecruitment + sex + PC1 + PC2 +PC3 + PC4 + PC5 + PC6 + PC7 + PC8 + PC9 + PC10 + PC11 + PC12 + PC13 + PC14 + PC15 + PC16 + PC17 + PC18 + PC19 + PC20 + PC21 + PC22 + PC23 + PC24 + PC25 + PC26 + PC27 + PC28 + PC29 + PC30 + PC31 + PC32 + PC33 + PC34 + PC35 + PC36 + PC37 + PC38 + PC39 + PC40, data = t.mpv.statin.prs)
+
+g_resid <- resid(g_resid)
+
+g0=g_resid[t.mpv.statin.prs$statin_use==0]
+
+ivmodel.MPV.statin <- glm(statin_use ~ predict(lm(MPV_initial_SD[statin_use==0]~g0), newdata=list(g0=g))+ age_initialrecruitment + sex + PC1 + PC2 +PC3 + PC4 + PC5 + PC6 + PC7 + PC8 + PC9 + PC10 + PC11 + PC12 + PC13 + PC14 + PC15 + PC16 + PC17 + PC18 + PC19 + PC20 + PC21 + PC22 + PC23 + PC24 + PC25 + PC26 + PC27 + PC28 + PC29 + PC30 + PC31 + PC32 + PC33 + PC34 + PC35 + PC36 + PC37 + PC38 + PC39 + PC40, data = t.mpv.statin.prs, family = "binomial") 
+
+summary(ivmodel.MPV.statin)
+summary(ivmodel.MPV.statin)$coef[2] # 2SLS estimate 
+summary(ivmodel.MPV.statin)$coef[2,2] # Standard error of 2SLS estimate 
+
+#Clopidogrel on mean platelet volume 
+g = t.mpv.clopidogrel.prs$MPV_PRS_SD
+
+g_resid <- lm(g ~ age_initialrecruitment + sex + PC1 + PC2 +PC3 + PC4 + PC5 + PC6 + PC7 + PC8 + PC9 + PC10 + PC11 + PC12 + PC13 + PC14 + PC15 + PC16 + PC17 + PC18 + PC19 + PC20 + PC21 + PC22 + PC23 + PC24 + PC25 + PC26 + PC27 + PC28 + PC29 + PC30 + PC31 + PC32 + PC33 + PC34 + PC35 + PC36 + PC37 + PC38 + PC39 + PC40, data = t.mpv.clopidogrel.prs)
+
+g_resid <- resid(g_resid)
+
+g0=g_resid[t.mpv.clopidogrel.prs$clopidogrel_use==0]
+
+ivmodel.MPV.clopidogrel <- glm(clopidogrel_use ~ predict(lm(MPV_initial_SD[clopidogrel_use==0]~g0), newdata=list(g0=g))+ age_initialrecruitment + sex + PC1 + PC2 +PC3 + PC4 + PC5 + PC6 + PC7 + PC8 + PC9 + PC10 + PC11 + PC12 + PC13 + PC14 + PC15 + PC16 + PC17 + PC18 + PC19 + PC20 + PC21 + PC22 + PC23 + PC24 + PC25 + PC26 + PC27 + PC28 + PC29 + PC30 + PC31 + PC32 + PC33 + PC34 + PC35 + PC36 + PC37 + PC38 + PC39 + PC40, data = t.mpv.clopidogrel.prs, family = "binomial") 
+
+summary(ivmodel.MPV.clopidogrel)
+summary(ivmodel.MPV.clopiodgrel)$coef[2] # 2SLS estimate 
+summary(ivmodel.MPV.clopidogrel)$coef[2,2] # Standard error of 2SLS estimate
+
+#Statin and clopidogrel use on mean platelet volume 
+g = t.mpv.statin.clopidogrel.prs$MPV_PRS_SD
+
+g_resid <- lm(g ~ age_initialrecruitment + sex + PC1 + PC2 +PC3 + PC4 + PC5 + PC6 + PC7 + PC8 + PC9 + PC10 + PC11 + PC12 + PC13 + PC14 + PC15 + PC16 + PC17 + PC18 + PC19 + PC20 + PC21 + PC22 + PC23 + PC24 + PC25 + PC26 + PC27 + PC28 + PC29 + PC30 + PC31 + PC32 + PC33 + PC34 + PC35 + PC36 + PC37 + PC38 + PC39 + PC40, data = t.mpv.statin.clopidogrel.prs)
+
+g_resid <- resid(g_resid)
+
+g0=g_resid[t.mpv.statin.clopidogrel.prs$statin_clopidogrel_use==0]
+
+ivmodel.MPV.statin.clopidogrel <- glm(statin_clopidogrel_use ~ predict(lm(MPV_initial_SD[statin_clopidogrel_use==0]~g0), newdata=list(g0=g))+ age_initialrecruitment + sex + PC1 + PC2 +PC3 + PC4 + PC5 + PC6 + PC7 + PC8 + PC9 + PC10 + PC11 + PC12 + PC13 + PC14 + PC15 + PC16 + PC17 + PC18 + PC19 + PC20 + PC21 + PC22 + PC23 + PC24 + PC25 + PC26 + PC27 + PC28 + PC29 + PC30 + PC31 + PC32 + PC33 + PC34 + PC35 + PC36 + PC37 + PC38 + PC39 + PC40, data = t.mpv.statin.clopidogrel.prs, family = "binomial") 
+
+summary(ivmodel.MPV.statin.clopidogrel)
+summary(ivmodel.MPV.statin.clopiodgrel)$coef[2] # 2SLS estimate 
+summary(ivmodel.MPV.statin.clopidogrel)$coef[2,2] # Standard error of 2SLS estimate
+
+
