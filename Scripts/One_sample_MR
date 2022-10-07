@@ -26,6 +26,18 @@ t.mpv.dvt <- data[c("FID", "IID", "MPV_initial_SD", "DVT", "sex", "age_initialre
 
 t.mpv.pe <- data[c("FID", "IID", "MPV_initial_SD", "PE", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
 
+t.plt.statin <- data[c("FID", "IID", "PLT_initial_SD", "statin_use", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
+
+t.plt.clopidogrel <- data[c("FID", "IID", "PLT_initial_SD", "clopidogrel_use", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
+
+t.plt.statin.clopidogrel <- data[c("FID", "IID", "PLT_initial_SD", "statin_clopidogrel_use", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
+
+t.mpv.statin <- data[c("FID", "IID", "MPV_initial_SD", "statin_use", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
+
+t.mpv.clopidogrel <- data[c("FID", "IID", "MPV_initial_SD", "clopidogrel_use", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
+
+t.mpv.statin.clopidogrel <- data[c("FID", "IID", "MPV_initial_SD", "statin_clopidogrel_use", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
+
 #Subset each platelet PRS 
 t.plt.prs.sd <- PLT_PRS_SD[c("FID", "IID", "PLT_PRS_SD")]
 t.mpv.prs.sd <- MPV_PRS_SD[c("FID", "IID", "MPV_PRS_SD")] 
@@ -39,6 +51,12 @@ t.mpv.acuteMI.prs <- inner_join(t.mpv.acuteMI, t.mpv.prs.sd, by = c("FID", "IID"
 t.mpv.mortalityMI.prs <- inner_join(t.mpv.mortalityMI, t.mpv.prs.sd, by = c("FID", "IID")) 
 t.mpv.dvt.prs <- inner_join(t.mpv.dvt, t.mpv.prs.sd, by = c("FID", "IID")) 
 t.mpv.pe.prs <- inner_join(t.mpv.pe, t.mpv.prs.sd, by = c("FID", "IID")) 
+t.plt.statin.prs <- inner_join(t.plt.statin, t.plt.prs.sd, by = c("FID", "IID")) 
+t.plt.clopidogrel.prs <- inner_join(t.plt.clopidogrel, t.plt.prs.sd, by = c("FID", "IID")) 
+t.plt.statin.clopidogrel.prs <- inner_join(t.plt.statin.clopidogrel, t.plt.prs.sd, by = c("FID", "IID")) 
+t.mpv.statin.prs <- inner_join(t.mpv.statin, t.mpv.prs.sd, by = c("FID", "IID")) 
+t.mpv.clopidogrel.prs <- inner_join(t.mpv.clopidogrel, t.mpv.prs.sd, by = c("FID", "IID")) 
+t.mpv.statin.clopidogrel.prs <- inner_join(t.mpv.statin.clopidogrel, t.mpv.prs.sd, by = c("FID", "IID")) 
 
 #Remove NAs from each subsetted dataframe
 t.plt.acuteMI.prs <- na.omit(t.plt.acuteMI.prs)
@@ -49,6 +67,12 @@ t.mpv.acuteMI.prs <- na.omit(t.mpv.acuteMI.prs)
 t.mpv.mortalityMI.prs <- na.omit(t.mpv.mortalityMI.prs)
 t.mpv.dvt.prs <- na.omit(t.mpv.dvt.prs)
 t.mpv.pe.prs <- na.omit(t.mpv.pe.prs)
+t.plt.statin.prs <- na.omit(t.plt.statin.prs)
+t.plt.clopidogrel.prs <- na.omit(t.plt.clopidogrel.prs)
+t.plt.statin.clopidogrel.prs <- na.omit(t.plt.statin.clopidogrel.prs)
+t.mpv.statin.prs <- na.omit(t.mpv.statin.prs)
+t.mpv.clopidogrel.prs <- na.omit(t.mpv.clopidogrel.prs)
+t.mpv.statin.clopidogrel.prs <- na.omit(t.mpv.statin.clopidogrel.prs)
 
 #2SLS analyses - Binary outcome - UK Biobank Overall
 #In a two-stage analysis using a binary outcome (case-control setting) requires use of logistic regression with the inference on the controls only (where Y = 0). This can be performed by sequential regression using the 'predict' function 
