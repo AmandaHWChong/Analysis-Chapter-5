@@ -26,17 +26,17 @@ t.mpv.dvt <- data[c("FID", "IID", "MPV_initial_SD", "DVT", "sex", "age_initialre
 
 t.mpv.pe <- data[c("FID", "IID", "MPV_initial_SD", "PE", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
 
-t.plt.statin <- data[c("FID", "IID", "PLT_initial_SD", "statin_use", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
+t.plt.aspirin <- data[c("FID", "IID", "PLT_initial_SD", "aspirin_use", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
 
 t.plt.clopidogrel <- data[c("FID", "IID", "PLT_initial_SD", "clopidogrel_use", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
 
-t.plt.statin.clopidogrel <- data[c("FID", "IID", "PLT_initial_SD", "statin_clopidogrel_use", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
+t.plt.aspirin.clopidogrel <- data[c("FID", "IID", "PLT_initial_SD", "aspirin_clopidogrel_use", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
 
-t.mpv.statin <- data[c("FID", "IID", "MPV_initial_SD", "statin_use", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
+t.mpv.aspirin <- data[c("FID", "IID", "MPV_initial_SD", "aspirin_use", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
 
 t.mpv.clopidogrel <- data[c("FID", "IID", "MPV_initial_SD", "clopidogrel_use", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
 
-t.mpv.statin.clopidogrel <- data[c("FID", "IID", "MPV_initial_SD", "statin_clopidogrel_use", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
+t.mpv.aspirin.clopidogrel <- data[c("FID", "IID", "MPV_initial_SD", "aspirin_clopidogrel_use", "sex", "age_initialrecruitment", "PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8", "PC9", "PC10", "PC11", "PC12", "PC13", "PC14", "PC15", "PC16", "PC17", "PC18", "PC19", "PC20", "PC21", "PC22", "PC23", "PC24", "PC25", "PC26", "PC27", "PC28", "PC29", "PC30", "PC31", "PC32", "PC33", "PC34", "PC35", "PC36", "PC37", "PC38", "PC39", "PC40")]
 
 #Subset each platelet PRS 
 t.plt.prs.sd <- PLT_PRS_SD[c("FID", "IID", "PLT_PRS_SD")]
@@ -51,12 +51,12 @@ t.mpv.acuteMI.prs <- inner_join(t.mpv.acuteMI, t.mpv.prs.sd, by = c("FID", "IID"
 t.mpv.mortalityMI.prs <- inner_join(t.mpv.mortalityMI, t.mpv.prs.sd, by = c("FID", "IID")) 
 t.mpv.dvt.prs <- inner_join(t.mpv.dvt, t.mpv.prs.sd, by = c("FID", "IID")) 
 t.mpv.pe.prs <- inner_join(t.mpv.pe, t.mpv.prs.sd, by = c("FID", "IID")) 
-t.plt.statin.prs <- inner_join(t.plt.statin, t.plt.prs.sd, by = c("FID", "IID")) 
+t.plt.aspirin.prs <- inner_join(t.plt.aspirin, t.plt.prs.sd, by = c("FID", "IID")) 
 t.plt.clopidogrel.prs <- inner_join(t.plt.clopidogrel, t.plt.prs.sd, by = c("FID", "IID")) 
-t.plt.statin.clopidogrel.prs <- inner_join(t.plt.statin.clopidogrel, t.plt.prs.sd, by = c("FID", "IID")) 
-t.mpv.statin.prs <- inner_join(t.mpv.statin, t.mpv.prs.sd, by = c("FID", "IID")) 
+t.plt.aspirin.clopidogrel.prs <- inner_join(t.plt.aspirin.clopidogrel, t.plt.prs.sd, by = c("FID", "IID")) 
+t.mpv.aspirin.prs <- inner_join(t.mpv.aspirin, t.mpv.prs.sd, by = c("FID", "IID")) 
 t.mpv.clopidogrel.prs <- inner_join(t.mpv.clopidogrel, t.mpv.prs.sd, by = c("FID", "IID")) 
-t.mpv.statin.clopidogrel.prs <- inner_join(t.mpv.statin.clopidogrel, t.mpv.prs.sd, by = c("FID", "IID")) 
+t.mpv.aspirin.clopidogrel.prs <- inner_join(t.mpv.aspirin.clopidogrel, t.mpv.prs.sd, by = c("FID", "IID")) 
 
 #Remove NAs from each subsetted dataframe
 t.plt.acuteMI.prs <- na.omit(t.plt.acuteMI.prs)
@@ -67,12 +67,12 @@ t.mpv.acuteMI.prs <- na.omit(t.mpv.acuteMI.prs)
 t.mpv.mortalityMI.prs <- na.omit(t.mpv.mortalityMI.prs)
 t.mpv.dvt.prs <- na.omit(t.mpv.dvt.prs)
 t.mpv.pe.prs <- na.omit(t.mpv.pe.prs)
-t.plt.statin.prs <- na.omit(t.plt.statin.prs)
+t.plt.aspirin.prs <- na.omit(t.plt.aspirin.prs)
 t.plt.clopidogrel.prs <- na.omit(t.plt.clopidogrel.prs)
-t.plt.statin.clopidogrel.prs <- na.omit(t.plt.statin.clopidogrel.prs)
-t.mpv.statin.prs <- na.omit(t.mpv.statin.prs)
+t.plt.aspirin.clopidogrel.prs <- na.omit(t.plt.aspirin.clopidogrel.prs)
+t.mpv.aspirin.prs <- na.omit(t.mpv.aspirin.prs)
 t.mpv.clopidogrel.prs <- na.omit(t.mpv.clopidogrel.prs)
-t.mpv.statin.clopidogrel.prs <- na.omit(t.mpv.statin.clopidogrel.prs)
+t.mpv.aspirin.clopidogrel.prs <- na.omit(t.mpv.aspirin.clopidogrel.prs)
 
 #2SLS analyses - Binary outcome - UK Biobank Overall
 #In a two-stage analysis using a binary outcome (case-control setting) requires use of logistic regression with the inference on the controls only (where Y = 0). This can be performed by sequential regression using the 'predict' function 
@@ -197,20 +197,20 @@ summary(ivmodel.MPV.PE)
 summary(ivmodel.MPV.PE)$coef[2] # 2SLS estimate 
 summary(ivmodel.MPV.PE)$coef[2,2] # Standard error of 2SLS estimate
 
-#Statin on platelet count 
-g = t.plt.statin.prs$PLT_PRS_SD
+#Aspirin on platelet count 
+g = t.plt.aspirin.prs$PLT_PRS_SD
 
-g_resid <- lm(g ~ age_initialrecruitment + sex + PC1 + PC2 +PC3 + PC4 + PC5 + PC6 + PC7 + PC8 + PC9 + PC10 + PC11 + PC12 + PC13 + PC14 + PC15 + PC16 + PC17 + PC18 + PC19 + PC20 + PC21 + PC22 + PC23 + PC24 + PC25 + PC26 + PC27 + PC28 + PC29 + PC30 + PC31 + PC32 + PC33 + PC34 + PC35 + PC36 + PC37 + PC38 + PC39 + PC40, data = t.plt.statin.prs)
+g_resid <- lm(g ~ age_initialrecruitment + sex + PC1 + PC2 +PC3 + PC4 + PC5 + PC6 + PC7 + PC8 + PC9 + PC10 + PC11 + PC12 + PC13 + PC14 + PC15 + PC16 + PC17 + PC18 + PC19 + PC20 + PC21 + PC22 + PC23 + PC24 + PC25 + PC26 + PC27 + PC28 + PC29 + PC30 + PC31 + PC32 + PC33 + PC34 + PC35 + PC36 + PC37 + PC38 + PC39 + PC40, data = t.plt.aspirin.prs)
 
 g_resid <- resid(g_resid)
 
-g0=g_resid[t.plt.statin.prs$statin_use==0]
+g0=g_resid[t.plt.aspirin.prs$aspirin_use==0]
 
-ivmodel.PLT.statin <- glm(statin_use ~ predict(lm(PLT_initial_SD[statin_use==0]~g0), newdata=list(g0=g))+ age_initialrecruitment + sex + PC1 + PC2 +PC3 + PC4 + PC5 + PC6 + PC7 + PC8 + PC9 + PC10 + PC11 + PC12 + PC13 + PC14 + PC15 + PC16 + PC17 + PC18 + PC19 + PC20 + PC21 + PC22 + PC23 + PC24 + PC25 + PC26 + PC27 + PC28 + PC29 + PC30 + PC31 + PC32 + PC33 + PC34 + PC35 + PC36 + PC37 + PC38 + PC39 + PC40, data = t.plt.statin.prs, family = "binomial") 
+ivmodel.PLT.aspirin <- glm(aspirin_use ~ predict(lm(PLT_initial_SD[aspirin_use==0]~g0), newdata=list(g0=g))+ age_initialrecruitment + sex + PC1 + PC2 +PC3 + PC4 + PC5 + PC6 + PC7 + PC8 + PC9 + PC10 + PC11 + PC12 + PC13 + PC14 + PC15 + PC16 + PC17 + PC18 + PC19 + PC20 + PC21 + PC22 + PC23 + PC24 + PC25 + PC26 + PC27 + PC28 + PC29 + PC30 + PC31 + PC32 + PC33 + PC34 + PC35 + PC36 + PC37 + PC38 + PC39 + PC40, data = t.plt.aspirin.prs, family = "binomial") 
 
-summary(ivmodel.PLT.statin)
-summary(ivmodel.PLT.statin)$coef[2] # 2SLS estimate 
-summary(ivmodel.PLT.statin)$coef[2,2] # Standard error of 2SLS estimate 
+summary(ivmodel.PLT.aspirin)
+summary(ivmodel.PLT.aspirin)$coef[2] # 2SLS estimate 
+summary(ivmodel.PLT.aspirin)$coef[2,2] # Standard error of 2SLS estimate 
 
 #Clopidogrel on platelet count 
 g = t.plt.clopidogrel.prs$PLT_PRS_SD
@@ -227,35 +227,35 @@ summary(ivmodel.PLT.clopidogrel)
 summary(ivmodel.PLT.clopiodgrel)$coef[2] # 2SLS estimate 
 summary(ivmodel.PLT.clopidogrel)$coef[2,2] # Standard error of 2SLS estimate
 
-#Statin and clopidogrel use on platelet count 
-g = t.plt.statin.clopidogrel.prs$PLT_PRS_SD
+#Aspirin and clopidogrel use on platelet count 
+g = t.plt.aspirin.clopidogrel.prs$PLT_PRS_SD
 
-g_resid <- lm(g ~ age_initialrecruitment + sex + PC1 + PC2 +PC3 + PC4 + PC5 + PC6 + PC7 + PC8 + PC9 + PC10 + PC11 + PC12 + PC13 + PC14 + PC15 + PC16 + PC17 + PC18 + PC19 + PC20 + PC21 + PC22 + PC23 + PC24 + PC25 + PC26 + PC27 + PC28 + PC29 + PC30 + PC31 + PC32 + PC33 + PC34 + PC35 + PC36 + PC37 + PC38 + PC39 + PC40, data = t.plt.statin.clopidogrel.prs)
-
-g_resid <- resid(g_resid)
-
-g0=g_resid[t.plt.statin.clopidogrel.prs$statin_clopidogrel_use==0]
-
-ivmodel.PLT.statin.clopidogrel <- glm(statin_clopidogrel_use ~ predict(lm(PLT_initial_SD[statin_clopidogrel_use==0]~g0), newdata=list(g0=g))+ age_initialrecruitment + sex + PC1 + PC2 +PC3 + PC4 + PC5 + PC6 + PC7 + PC8 + PC9 + PC10 + PC11 + PC12 + PC13 + PC14 + PC15 + PC16 + PC17 + PC18 + PC19 + PC20 + PC21 + PC22 + PC23 + PC24 + PC25 + PC26 + PC27 + PC28 + PC29 + PC30 + PC31 + PC32 + PC33 + PC34 + PC35 + PC36 + PC37 + PC38 + PC39 + PC40, data = t.plt.statin.clopidogrel.prs, family = "binomial") 
-
-summary(ivmodel.PLT.statin.clopidogrel)
-summary(ivmodel.PLT.statin.clopiodgrel)$coef[2] # 2SLS estimate 
-summary(ivmodel.PLT.statin.clopidogrel)$coef[2,2] # Standard error of 2SLS estimate
-
-#Statin on mean platelet volume 
-g = t.mpv.statin.prs$MPV_PRS_SD
-
-g_resid <- lm(g ~ age_initialrecruitment + sex + PC1 + PC2 +PC3 + PC4 + PC5 + PC6 + PC7 + PC8 + PC9 + PC10 + PC11 + PC12 + PC13 + PC14 + PC15 + PC16 + PC17 + PC18 + PC19 + PC20 + PC21 + PC22 + PC23 + PC24 + PC25 + PC26 + PC27 + PC28 + PC29 + PC30 + PC31 + PC32 + PC33 + PC34 + PC35 + PC36 + PC37 + PC38 + PC39 + PC40, data = t.mpv.statin.prs)
+g_resid <- lm(g ~ age_initialrecruitment + sex + PC1 + PC2 +PC3 + PC4 + PC5 + PC6 + PC7 + PC8 + PC9 + PC10 + PC11 + PC12 + PC13 + PC14 + PC15 + PC16 + PC17 + PC18 + PC19 + PC20 + PC21 + PC22 + PC23 + PC24 + PC25 + PC26 + PC27 + PC28 + PC29 + PC30 + PC31 + PC32 + PC33 + PC34 + PC35 + PC36 + PC37 + PC38 + PC39 + PC40, data = t.plt.aspirin.clopidogrel.prs)
 
 g_resid <- resid(g_resid)
 
-g0=g_resid[t.mpv.statin.prs$statin_use==0]
+g0=g_resid[t.plt.aspirin.clopidogrel.prs$aspirin_clopidogrel_use==0]
 
-ivmodel.MPV.statin <- glm(statin_use ~ predict(lm(MPV_initial_SD[statin_use==0]~g0), newdata=list(g0=g))+ age_initialrecruitment + sex + PC1 + PC2 +PC3 + PC4 + PC5 + PC6 + PC7 + PC8 + PC9 + PC10 + PC11 + PC12 + PC13 + PC14 + PC15 + PC16 + PC17 + PC18 + PC19 + PC20 + PC21 + PC22 + PC23 + PC24 + PC25 + PC26 + PC27 + PC28 + PC29 + PC30 + PC31 + PC32 + PC33 + PC34 + PC35 + PC36 + PC37 + PC38 + PC39 + PC40, data = t.mpv.statin.prs, family = "binomial") 
+ivmodel.PLT.aspirin.clopidogrel <- glm(aspirin_clopidogrel_use ~ predict(lm(PLT_initial_SD[aspirin_clopidogrel_use==0]~g0), newdata=list(g0=g))+ age_initialrecruitment + sex + PC1 + PC2 +PC3 + PC4 + PC5 + PC6 + PC7 + PC8 + PC9 + PC10 + PC11 + PC12 + PC13 + PC14 + PC15 + PC16 + PC17 + PC18 + PC19 + PC20 + PC21 + PC22 + PC23 + PC24 + PC25 + PC26 + PC27 + PC28 + PC29 + PC30 + PC31 + PC32 + PC33 + PC34 + PC35 + PC36 + PC37 + PC38 + PC39 + PC40, data = t.plt.aspirin.clopidogrel.prs, family = "binomial") 
 
-summary(ivmodel.MPV.statin)
-summary(ivmodel.MPV.statin)$coef[2] # 2SLS estimate 
-summary(ivmodel.MPV.statin)$coef[2,2] # Standard error of 2SLS estimate 
+summary(ivmodel.PLT.aspirin.clopidogrel)
+summary(ivmodel.PLT.aspirin.clopiodgrel)$coef[2] # 2SLS estimate 
+summary(ivmodel.PLT.aspirin.clopidogrel)$coef[2,2] # Standard error of 2SLS estimate
+
+#Aspirin on mean platelet volume 
+g = t.mpv.aspirin.prs$MPV_PRS_SD
+
+g_resid <- lm(g ~ age_initialrecruitment + sex + PC1 + PC2 +PC3 + PC4 + PC5 + PC6 + PC7 + PC8 + PC9 + PC10 + PC11 + PC12 + PC13 + PC14 + PC15 + PC16 + PC17 + PC18 + PC19 + PC20 + PC21 + PC22 + PC23 + PC24 + PC25 + PC26 + PC27 + PC28 + PC29 + PC30 + PC31 + PC32 + PC33 + PC34 + PC35 + PC36 + PC37 + PC38 + PC39 + PC40, data = t.mpv.aspirin.prs)
+
+g_resid <- resid(g_resid)
+
+g0=g_resid[t.mpv.aspirin.prs$aspirin_use==0]
+
+ivmodel.MPV.aspirin <- glm(aspirin_use ~ predict(lm(MPV_initial_SD[aspirin_use==0]~g0), newdata=list(g0=g))+ age_initialrecruitment + sex + PC1 + PC2 +PC3 + PC4 + PC5 + PC6 + PC7 + PC8 + PC9 + PC10 + PC11 + PC12 + PC13 + PC14 + PC15 + PC16 + PC17 + PC18 + PC19 + PC20 + PC21 + PC22 + PC23 + PC24 + PC25 + PC26 + PC27 + PC28 + PC29 + PC30 + PC31 + PC32 + PC33 + PC34 + PC35 + PC36 + PC37 + PC38 + PC39 + PC40, data = t.mpv.aspirin.prs, family = "binomial") 
+
+summary(ivmodel.MPV.aspirin)
+summary(ivmodel.MPV.aspirin)$coef[2] # 2SLS estimate 
+summary(ivmodel.MPV.aspirin)$coef[2,2] # Standard error of 2SLS estimate 
 
 #Clopidogrel on mean platelet volume 
 g = t.mpv.clopidogrel.prs$MPV_PRS_SD
@@ -272,19 +272,19 @@ summary(ivmodel.MPV.clopidogrel)
 summary(ivmodel.MPV.clopiodgrel)$coef[2] # 2SLS estimate 
 summary(ivmodel.MPV.clopidogrel)$coef[2,2] # Standard error of 2SLS estimate
 
-#Statin and clopidogrel use on mean platelet volume 
-g = t.mpv.statin.clopidogrel.prs$MPV_PRS_SD
+#Aspirin and clopidogrel use on mean platelet volume 
+g = t.mpv.aspirin.clopidogrel.prs$MPV_PRS_SD
 
-g_resid <- lm(g ~ age_initialrecruitment + sex + PC1 + PC2 +PC3 + PC4 + PC5 + PC6 + PC7 + PC8 + PC9 + PC10 + PC11 + PC12 + PC13 + PC14 + PC15 + PC16 + PC17 + PC18 + PC19 + PC20 + PC21 + PC22 + PC23 + PC24 + PC25 + PC26 + PC27 + PC28 + PC29 + PC30 + PC31 + PC32 + PC33 + PC34 + PC35 + PC36 + PC37 + PC38 + PC39 + PC40, data = t.mpv.statin.clopidogrel.prs)
+g_resid <- lm(g ~ age_initialrecruitment + sex + PC1 + PC2 +PC3 + PC4 + PC5 + PC6 + PC7 + PC8 + PC9 + PC10 + PC11 + PC12 + PC13 + PC14 + PC15 + PC16 + PC17 + PC18 + PC19 + PC20 + PC21 + PC22 + PC23 + PC24 + PC25 + PC26 + PC27 + PC28 + PC29 + PC30 + PC31 + PC32 + PC33 + PC34 + PC35 + PC36 + PC37 + PC38 + PC39 + PC40, data = t.mpv.aspirin.clopidogrel.prs)
 
 g_resid <- resid(g_resid)
 
-g0=g_resid[t.mpv.statin.clopidogrel.prs$statin_clopidogrel_use==0]
+g0=g_resid[t.mpv.aspirin.clopidogrel.prs$aspirin_clopidogrel_use==0]
 
-ivmodel.MPV.statin.clopidogrel <- glm(statin_clopidogrel_use ~ predict(lm(MPV_initial_SD[statin_clopidogrel_use==0]~g0), newdata=list(g0=g))+ age_initialrecruitment + sex + PC1 + PC2 +PC3 + PC4 + PC5 + PC6 + PC7 + PC8 + PC9 + PC10 + PC11 + PC12 + PC13 + PC14 + PC15 + PC16 + PC17 + PC18 + PC19 + PC20 + PC21 + PC22 + PC23 + PC24 + PC25 + PC26 + PC27 + PC28 + PC29 + PC30 + PC31 + PC32 + PC33 + PC34 + PC35 + PC36 + PC37 + PC38 + PC39 + PC40, data = t.mpv.statin.clopidogrel.prs, family = "binomial") 
+ivmodel.MPV.aspirin.clopidogrel <- glm(aspirin_clopidogrel_use ~ predict(lm(MPV_initial_SD[aspirin_clopidogrel_use==0]~g0), newdata=list(g0=g))+ age_initialrecruitment + sex + PC1 + PC2 +PC3 + PC4 + PC5 + PC6 + PC7 + PC8 + PC9 + PC10 + PC11 + PC12 + PC13 + PC14 + PC15 + PC16 + PC17 + PC18 + PC19 + PC20 + PC21 + PC22 + PC23 + PC24 + PC25 + PC26 + PC27 + PC28 + PC29 + PC30 + PC31 + PC32 + PC33 + PC34 + PC35 + PC36 + PC37 + PC38 + PC39 + PC40, data = t.mpv.aspirin.clopidogrel.prs, family = "binomial") 
 
-summary(ivmodel.MPV.statin.clopidogrel)
-summary(ivmodel.MPV.statin.clopiodgrel)$coef[2] # 2SLS estimate 
-summary(ivmodel.MPV.statin.clopidogrel)$coef[2,2] # Standard error of 2SLS estimate
+summary(ivmodel.MPV.aspirin.clopidogrel)
+summary(ivmodel.MPV.aspirin.clopiodgrel)$coef[2] # 2SLS estimate 
+summary(ivmodel.MPV.aspirin.clopidogrel)$coef[2,2] # Standard error of 2SLS estimate
 
 
