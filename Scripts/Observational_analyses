@@ -47,6 +47,9 @@ t.mpv.pe <- na.omit(t.mpv.pe)
 t.plt.aspirin <- na.omit(t.plt.aspirin)
 t.plt.clopidogrel <- na.omit(t.plt.clopidogrel)
 t.plt.aspirin.clopidogrel <- na.omit(t.plt.aspirin.clopidogrel)
+t.mpv.aspirin <- na.omit(t.mpv.aspirin)
+t.mpv.clopidogrel <- na.omit(t.mpv.clopidogrel)
+t.mpv.aspirin.clopidogrel <- na.omit(t.mpv.aspirin.clopidogrel)
 
 #Perform logistic regression 
 #Acute MI on platelet count 
