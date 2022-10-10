@@ -130,7 +130,7 @@ summary(obs.model.aspirin.clopidogrel.plt)$coef[2] # observational estimate
 summary(obs.model.aspirin.clopidogrel.plt)$coef[2,2] # Standard error of observational estimate
 
 #Aspirin on mean platelet volume
-obs.model.aspirin.mpv <- glm(aspirin_use ~ MPV_initial_SD + alcintakefreq_initialassessment + eversmoked_initialassessment + BMI_initialassessment + HDL_initialassessment + LDL_initialassessment + triglycerides_initialassessment + sex + age_initialrecruitment, data = t.plt.aspirin, family = "binomial")
+obs.model.aspirin.mpv <- glm(aspirin_use ~ MPV_initial_SD + alcintakefreq_initialassessment + eversmoked_initialassessment + BMI_initialassessment + HDL_initialassessment + LDL_initialassessment + triglycerides_initialassessment + sex + age_initialrecruitment, data = t.mpv.aspirin, family = "binomial")
 
 summary(obs.model.aspirin.mpv)
 summary(obs.model.aspirin.mpv)$coef[2] # observational estimate 
