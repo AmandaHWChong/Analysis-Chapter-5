@@ -23,6 +23,18 @@ t.mpv.dvt <- data[c("FID", "IID", "MPV_initial_SD", "DVT", "alcintakefreq_initia
 
 t.mpv.pe <- data[c("FID", "IID", "MPV_initial_SD", "PE", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment")]
 
+t.plt.aspirin <- data[c("FID", "IID", "PLT_initial_SD", "aspirin_use", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment")]
+
+t.plt.clopidogrel <- data[c("FID", "IID", "PLT_initial_SD", "clopidogrel_use", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment")]
+
+t.plt.aspirin.clopidogrel <- data[c("FID", "IID", "PLT_initial_SD", "aspirin_clopidogrel_use", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment")]
+
+t.mpv.aspirin <- data[c("FID", "IID", "MPV_initial_SD", "aspirin_use", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment")]
+
+t.mpv.clopidogrel <- data[c("FID", "IID", "MPV_initial_SD", "clopidogrel_use", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment")]
+
+t.mpv.aspirin.clopidogrel <- data[c("FID", "IID", "MPV_initial_SD", "aspirin_clopidogrel_use", "alcintakefreq_initialassessment", "eversmoked_initialassessment", "BMI_initialassessment", "HDL_initialassessment", "LDL_initialassessment", "triglycerides_initialassessment", "sex", "age_initialrecruitment")]
+
 #Remove NAs from each subsetted dataframe
 t.plt.acuteMI <- na.omit(t.plt.acuteMI)
 t.plt.mortalityMI <- na.omit(t.plt.mortalityMI)
@@ -32,6 +44,9 @@ t.mpv.acuteMI <- na.omit(t.mpv.acuteMI)
 t.mpv.mortalityMI <- na.omit(t.mpv.mortalityMI)
 t.mpv.dvt <- na.omit(t.mpv.dvt)
 t.mpv.pe <- na.omit(t.mpv.pe)
+t.plt.aspirin <- na.omit(t.plt.aspirin)
+t.plt.clopidogrel <- na.omit(t.plt.clopidogrel)
+t.plt.aspirin.clopidogrel <- na.omit(t.plt.aspirin.clopidogrel)
 
 #Perform logistic regression 
 #Acute MI on platelet count 
@@ -89,3 +104,46 @@ obs.model.pe.mpv <- glm(PE ~ MPV_initial_SD + alcintakefreq_initialassessment + 
 summary(obs.model.pe.mpv)
 summary(obs.model.pe.mpv)$coef[2] # observational estimate 
 summary(obs.model.pe.mpv)$coef[2,2] # Standard error of observational estimate
+
+#Aspirin on platelet count 
+obs.model.aspirin.plt <- glm(aspirin_use ~ PLT_initial_SD + alcintakefreq_initialassessment + eversmoked_initialassessment + BMI_initialassessment + HDL_initialassessment + LDL_initialassessment + triglycerides_initialassessment + sex + age_initialrecruitment, data = t.plt.aspirin, family = "binomial")
+
+summary(obs.model.aspirin.plt)
+summary(obs.model.aspirin.plt)$coef[2] # observational estimate 
+summary(obs.model.aspirin.plt)$coef[2,2] # Standard error of observational estimate
+
+#Clopidogrel on platelet count 
+obs.model.clopidogrel.plt <- glm(clopidogrel_use ~ PLT_initial_SD + alcintakefreq_initialassessment + eversmoked_initialassessment + BMI_initialassessment + HDL_initialassessment + LDL_initialassessment + triglycerides_initialassessment + sex + age_initialrecruitment, data = t.plt.clopidogrel, family = "binomial")
+
+summary(obs.model.clopidogrel.plt)
+summary(obs.model.clopidogrel.plt)$coef[2] # observational estimate 
+summary(obs.model.clopidogrel.plt)$coef[2,2] # Standard error of observational estimate
+
+#Aspirin and clopidogrel on platelet count 
+obs.model.aspirin.clopidogrel.plt <- glm(aspirin_clopidogrel_use ~ PLT_initial_SD + alcintakefreq_initialassessment + eversmoked_initialassessment + BMI_initialassessment + HDL_initialassessment + LDL_initialassessment + triglycerides_initialassessment + sex + age_initialrecruitment, data = t.plt.aspirin.clopidogrel, family = "binomial")
+
+summary(obs.model.aspirin.clopidogrel.plt)
+summary(obs.model.aspirin.clopidogrel.plt)$coef[2] # observational estimate 
+summary(obs.model.aspirin.clopidogrel.plt)$coef[2,2] # Standard error of observational estimate
+
+#Aspirin on platelet count 
+obs.model.aspirin.mpv <- glm(aspirin_use ~ MPV_initial_SD + alcintakefreq_initialassessment + eversmoked_initialassessment + BMI_initialassessment + HDL_initialassessment + LDL_initialassessment + triglycerides_initialassessment + sex + age_initialrecruitment, data = t.plt.aspirin, family = "binomial")
+
+summary(obs.model.aspirin.mpv)
+summary(obs.model.aspirin.mpv)$coef[2] # observational estimate 
+summary(obs.model.aspirin.mpv)$coef[2,2] # Standard error of observational estimate
+
+#Clopidogrel on platelet count 
+obs.model.clopidogrel.mpv <- glm(clopidogrel_use ~ MPV_initial_SD + alcintakefreq_initialassessment + eversmoked_initialassessment + BMI_initialassessment + HDL_initialassessment + LDL_initialassessment + triglycerides_initialassessment + sex + age_initialrecruitment, data = t.mpv.clopidogrel, family = "binomial")
+
+summary(obs.model.clopidogrel.mpv)
+summary(obs.model.clopidogrel.mpv)$coef[2] # observational estimate 
+summary(obs.model.clopidogrel.mpv)$coef[2,2] # Standard error of observational estimate
+
+#Aspirin and clopidogrel on platelet count 
+obs.model.aspirin.clopidogrel.mpv <- glm(aspirin_clopidogrel_use ~ MPV_initial_SD + alcintakefreq_initialassessment + eversmoked_initialassessment + BMI_initialassessment + HDL_initialassessment + LDL_initialassessment + triglycerides_initialassessment + sex + age_initialrecruitment, data = t.mpv.aspirin.clopidogrel, family = "binomial")
+
+summary(obs.model.aspirin.clopidogrel.mpv)
+summary(obs.model.aspirin.clopidogrel.mpv)$coef[2] # observational estimate 
+summary(obs.model.aspirin.clopidogrel.mpv)$coef[2,2] # Standard error of observational estimate
+
